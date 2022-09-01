@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<br /> <br /> <br />
+
+<div class="container">
+    <form action="/" method="POST">
+        <div class="form-group">
+
+            <!--------------------------     first row of the form      ------------------>
+            <div class="row">
+                <div class="col">
+                    <label for="validationServer01"> 1. What type of data are you looking for?</label>
+                    <br /><br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Email" name="data">
+                        <label class="form-check-label" for="inlineCheckbox1">Email</label>
+                    </div> <br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Work Phone" name="data">
+                        <label class="form-check-label" for="inlineCheckbox2">Work Phone</label>
+                    </div><br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Mobile" name="data">
+                        <label class="form-check-label" for="inlineCheckbox3">Mobile</label>
+                    </div>
+
+
+                </div>
+
+                <br>
+
+                <div class="col">
+                    <label for="validationServer01"> 2. What type of contract would you like?</label>
+                    <!-- <input type="text" class="form-control is-valid-control" id="validationServer01"  placeholder="Enter amount" name="net_month_income", value = "{{ email }}"> -->
+                    <br /><br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Monthly" name="contract">
+                        <label class="form-check-label" for="inlineCheckbox4">Monthly</label>
+                    </div><br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="Annual" name="contract">
+                        <label class="form-check-label" for="inlineCheckbox5">Annually</label>
+                    </div>
+
+                </div>
+
+
+                {% if error %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{ error }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                {% endif %}
+
+            </div> <br/><br/><br/>
+
+            <!--------------------------     Second row of the form      ------------------>
+            <div class="row">
+                <div class="col">
+                    <label for="validationServer01"> 3. What is your budget per month for contact data??</label>
+                    <br /><br />
+                    <div class="col-md-8">
+                        <div class="input-group mb-6">
+                            <span class="input-group-text mw-4">$</span>
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="Amount" placeholder="Enter Amount in USD">
+                            <span class="input-group-text">.00</span> 
+                        </div> <br />
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox6" value="Monthly" name="duration">
+                            <label class="form-check-label" for="inlineCheckbox6">Monthly</label>
+                        </div>
+                        <div class="form-check form-check-inline" >
+                            <input class="form-check-input" type="radio" id="inlineCheckbox7" value="Annual" name="duration">
+                            <label class="form-check-label" for="inlineCheckbox7">Annual</label>
+                        </div>
+
+                        <div class="form-check form-check-inline" >
+                            <input class="form-check-input" type="radio" id="inlineCheckbox8" value="Flexible" name="duration">
+                            <label class="form-check-label" for="inlineCheckbox8">I am flexible</label>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="col">
+                    <label for="validationServer01"> 4. Where are your prospects located?</label>
+                    <!-- <input type="text" class="form-control is-valid-control" id="validationServer01"  placeholder="Enter amount" name="net_month_income", value = "{{ email }}"> -->
+                    <br /><br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineCheckbox9" value="International" name="location">
+                        <label class="form-check-label" for="inlineCheckbox9">International</label>
+                    </div><br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineCheckbox10" value="Domestic" name="location">
+                        <label class="form-check-label" for="inlineCheckbox10">Domestic</label>
+                    </div>
+                    <div class="form-check" >
+                        <input class="form-check-input" type="radio" id="inlineCheckbox11" value="All" name="location">
+                        <label class="form-check-label" for="inlineCheckbox11">All</label>
+                    </div>
+                </div>
+
+            </div><br/><br/><br/>
+
+
+            <!--------------------------    Third row of the form      ------------------>
+            <div class="row">
+                <div class="col">
+                    <label for="validationServer01"> 5. How many users will need access to the data?</label>
+                    <br /><br />
+                    <div class="col-md-6">
+                        <div class="input-group input-group-default mw-6">
+                            <input type="text" class="form-control"  aria-describedby="inputGroup-sizing-sm" name="users" placeholder="Enter a number">
+                        </div>
+                    </div> <br />
+
+                    
+                </div>
+
+                <br>
+
+                <div class="col">
+                    <label for="validationServer01"> 6. What sales engagement tools are you interested from a data provider?</label>
+                    <!-- <input type="text" class="form-control is-valid-control" id="validationServer01"  placeholder="Enter amount" name="net_month_income", value = "{{ email }}"> -->
+                    <br /><br />
+                    <select class="selectpicker" data-size="5" multiple data-live-search="true" data-width="70%" name="tools">
+                        <option>All</option>
+                        <option>Outreach</option>
+                        <option>Salesloft</option>
+                        <option>Reply</option>
+                        <option>Woodpecker</option>
+                        <option>Lemlist</option>
+                        <option>Close</option>
+                        <option>HubSpot</option>
+                        <option>Salesforce</option>
+                        <option>Pipedrive</option>
+                        <option>Nutshell</option>
+                        <option>Zoho</option>
+                        <option>Freshworks</option>
+
+
+                    </select>
+
+                </div>
+
+            </div><br/><br/><br/>
+
+
+            <!--------------------------    Fourth row of the form      ------------------>
+            <div class="row flex-grow-1">
+                <div class="col">
+                    <label for="validationServer01"> 7. Would like to have any of these features? </label>
+                    <br /><br />
+        
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox13" value="Yes" name="feature">
+                        <label class="form-check-label" for="inlineCheckbox13">Contract Enrichment</label>
+                    </div>
+                    <div class="form-check" >
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox14" value="Yes" name="feature">
+                        <label class="form-check-label" for="inlineCheckbox14">Intent Data</label>
+                    </div>
+    
+                </div> <br/>
+
+                <div class="col">
+                    <label for="validationServer01"> 8. Do you need any of these CRM integration tool? (Like CRM) </label>
+                    <!-- <input type="text" class="form-control is-valid-control" id="validationServer01"  placeholder="Enter amount" name="net_month_income", value = "{{ email }}"> -->
+                    <br /><br />
+                    <select class="selectpicker" data-size="5" multiple data-live-search="true" data-width="70%" name="integrate">
+                        <option>All</option>
+                        <option>Microsoft Dynamics</option>
+                        <option>HubSpot</option>
+                        <option>Salesforce</option>
+                        <option>Pipedrive</option>
+                        <option>SugarCRM</option>
+                        <option>Zoho</option>
+                        <option>Insightly</option>
+                        <option>Copper</option>
+                        <option>Nimble</option>
+                        <option>Infusionsoft</option>
+                        <option>Capsule</option>
+                        <option>Base</option>
+                        <option>Pipeline</option>
+                        <option>Vtiger</option>
+                        <option>Keap</option>
+                        <option>Sugar CRM</option>
+                        <option>Freshsales</option>
+
+
+                    </select>
+
+                </div>
+
+            </div><br/><br/><br/><br/><br/><br/>
+
+
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+
+    </form>
+</div>
+
+
+{% endblock %}
