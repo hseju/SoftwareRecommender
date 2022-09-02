@@ -1,2 +1,2 @@
-,data,contract,duration,price,location,user,tools,features,crm
-0,"['Email', 'Work Phone', 'Mobile']","['Monthly', 'Annual']",['Monthly'],800,['All'],2,['All'],"['ContractEnrichment', 'IntentData']",['All']
+,data,contract,duration,price,Location,user,tools,features,crm
+0,['Mobile'],['Monthly'],['Monthly'],50,['All'],2,['Woodpecker'],"['ContractEnrichment', 'IntentData']","['Microsoft Dynamics', 'HubSpot']"

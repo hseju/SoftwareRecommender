@@ -27,7 +27,7 @@ def home():
         contract = request.form.getlist("contract")
         duration = request.form.getlist("duration")
         price = request.form['Amount']
-        location = request.form.getlist("location")
+        Location = request.form.getlist("Location")
         users = request.form['users']
         tools = request.form.getlist('tools')
         features = request.form.getlist('feature')
@@ -37,17 +37,16 @@ def home():
         df['contract'] = [contract]
         df['duration']  = [duration]
         df['price']  = price
-        df['location']  = [location]
+        df['Location']  = [Location]
         df['user'] = users 
         df['tools'] = [tools]
         df['features'] = [features]
         df['crm'] = [crm]
 
         df.to_csv("user_data.csv")
-        
-        import filter
-        return render_template("result.html", company1 = filter.Company1, company2 = filter.Company2,
-                               company3 = filter.Company3 )
+
+        import rec
+        return render_template("result.html", company = rec.result)
          
     else:
         

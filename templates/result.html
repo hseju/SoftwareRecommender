@@ -4,14 +4,48 @@
 
 <div class="container">
     <br/><br/>
-    <h2> We recommend these top 3 products for you:</h2> <br><br>
-    <h3>{{company1}}</h3>
-    <h3>{{company2}}</h3>
-    <h3>{{company3}}</h3>
+    <h2> These are the top 3 recommendations: </h2> <br><br>
+    
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Company</th>
+            <th scope="col">{{company.columns[0]}}</th>
+            <th scope="col">{{company.columns[1]}}</th>
+            <th scope="col">{{company.columns[-1]}}</th>
+            <th scope="col">Tools CRM..etc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{company.index[0]}}</th>
+            <td>{{company.iloc[0,0]}}</td>
+            <td>{{company.iloc[0,1]}}</td>
+            <td>{{company.iloc[0,-1]}}</td>
+            <td>{{(company['CRM Integrations']+ "," + company['SEPI'])[0]}}</td>
+          </tr>
+          <tr>
+            <th scope="row">{{company.index[1]}}</th>
+            <td>{{company.iloc[1,0]}}</td>
+            <td>{{company.iloc[1,1]}}</td>
+            <td>{{company.iloc[1,-1]}}</td>
+            <td>{{(company['CRM Integrations']+ "," + company['SEPI'])[1]}}</td>
+          </tr>
+          <tr>
+            <th scope="row">{{company.index[2]}}</th>
+            <td>{{company.iloc[2,0]}}</td>
+            <td>{{company.iloc[2,1]}}</td>
+            <td>{{company.iloc[2,-1]}}</td>
+            <td>{{(company['CRM Integrations']+ "," + company['SEPI'])[2]}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <br/><br/><br/><br/><br/>
+    <br/><br/>
 
     <a class='btn btn-primary' href="{{ url_for('home') }}">Home</a>
+
+    <br/><br/>
 </div>
 
 {% endblock %}
