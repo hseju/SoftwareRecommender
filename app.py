@@ -3,7 +3,7 @@ from select import select
 from unicodedata import name
 import pandas as pd
 import numpy as np
-import filter
+
 import inquirer
 
 from email.policy import default
@@ -44,8 +44,10 @@ def home():
         df['crm'] = [crm]
 
         df.to_csv("user_data.csv")
-
-        return render_template("result.html", recommend = filter.recommend)
+        
+        import filter
+        return render_template("result.html", company1 = filter.Company1, company2 = filter.Company2,
+                               company3 = filter.Company3 )
          
     else:
         

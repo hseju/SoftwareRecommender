@@ -2,12 +2,16 @@
 
 {% block content %}
 
+<div class="container">
+    <br/><br/>
+    <h2> We recommend these top 3 products for you:</h2> <br><br>
+    <h3>{{company1}}</h3>
+    <h3>{{company2}}</h3>
+    <h3>{{company3}}</h3>
 
-<br/><br/>
-<p> We recommend you to get this {{recommend}}</p>
-<br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/>
 
-<a class='btn btn-primary' href="{{ url_for('home') }}">Home</a>
-
+    <a class='btn btn-primary' href="{{ url_for('home') }}">Home</a>
+</div>
 
 {% endblock %}
