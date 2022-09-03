@@ -3,6 +3,10 @@ import pandas as pd
 from email.policy import default
 from flask import Flask, render_template, request, redirect
 import os
+
+
+
+#create an instance of app
 app = Flask(__name__)
 
 
@@ -23,20 +27,21 @@ def home():
         features = request.form.getlist('feature')
         crm = request.form.getlist('integrate')
 
-        df['data'] = [data]
-        df['contract'] = [contract]
-        df['duration']  = [duration]
-        df['price']  = price
-        df['Location']  = [Location]
-        df['user'] = users 
-        df['tools'] = [tools]
-        df['features'] = [features]
-        df['crm'] = [crm]
+        df['data'] = [str(data)]
+        df['contract'] = [str(contract)]
+        df['duration']  = [str(duration)]
+        df['price']  = int(price)
+        df['Location']  = [str(Location)]
+        df['user'] = int(users) 
+        df['tools'] = [str(tools)]
+        df['features'] = [str(features)]
+        df['crm'] = [str(crm)]
 
         df.to_csv("user_data.csv")
-
+        
         import rec
-        return render_template("result.html", company = rec.result_final)
+        result_final = rec.get_results(df)
+        return render_template("result.html", company = result_final)
          
     else:
         
