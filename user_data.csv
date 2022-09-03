@@ -1,2 +1,2 @@
 ,data,contract,duration,price,Location,user,tools,features,crm
-0,[],[],[],,[],,[],[],[]
+0,['Email'],['Monthly'],['Monthly'],50,['All'],3,['Freshworks'],[],['Freshsales']

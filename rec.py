@@ -115,6 +115,9 @@ for i,item in enumerate(df_user_matrix):
         print(item, df_pro[item].dtype)
         df_pro[item] = df_pro[item]+1
 
+
+print(df_pro.sum(axis=1))
+
 #adding the recommended weighted sum to the original dataframe
 df_soft['recommend']= df_pro.sum(axis=1)
 #add back the pricing range column 
@@ -130,4 +133,6 @@ else:
 
 
 #filtering top three
-result = result[:3]
+result_final = result[:3]
+
+print(result)

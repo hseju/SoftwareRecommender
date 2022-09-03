@@ -36,7 +36,7 @@ def home():
         df.to_csv("user_data.csv")
 
         import rec
-        return render_template("result.html", company = rec.result)
+        return render_template("result.html", company = rec.result_final)
          
     else:
         
