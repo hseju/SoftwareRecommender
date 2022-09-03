@@ -47,7 +47,7 @@ def home():
 def result():
 
     if request.method == 'POST':
-        return redirect("home")
+        return render_template("home.html")
     
     return render_template("result.html")
 
