@@ -1,18 +1,8 @@
 
-from select import select
-from unicodedata import name
 import pandas as pd
-import numpy as np
-
-import inquirer
-
 from email.policy import default
-from flask import Flask, render_template, request, redirect, flash
-from flask_sqlalchemy import SQLAlchemy 
-from datetime import datetime
-
-
-
+from flask import Flask, render_template, request, redirect
+import os
 app = Flask(__name__)
 
 
@@ -64,4 +54,6 @@ def result():
 
 
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get('PORT', 5000))
+
+    app.run(host="0.0.0.0", port=port, debug=True)

@@ -7,7 +7,7 @@ import Assign
 #get current working directory
 cwd = os.getcwd()
 #load the dataset
-df = pd.read_excel(cwd+"/B2B Data Provider-sample1.xlsx", index_col=0)
+df = pd.read_csv(cwd+"/B2B Data Provider.csv", index_col=0, encoding="unicode_escape")
 #replace all Nan values with -
 df = df.replace(np.nan, "-")
 

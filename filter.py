@@ -5,7 +5,7 @@ import os
 cwd = os.getcwd()
 
 #get the dataframe from B2B
-df_soft = pd.read_excel(cwd+"/B2B Data Provider-sample1.xlsx")
+df_soft = pd.read_excel(cwd+"/B2B Data Provider.csv")
 #removing unnecessary columns
 df_soft = df_soft.drop(['Additional Pricing Info','Website','Unlimited Data Plan'], axis=1) 
 #replace all Nan values with -
