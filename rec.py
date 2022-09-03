@@ -7,7 +7,7 @@ import Assign
 #get current working directory
 cwd = os.getcwd()
 #load the dataset
-df = pd.read_csv(cwd+"/B2B Data Provider.csv", index_col=0, encoding="unicode_escape")
+df = pd.read_excel(cwd+"/B2B Data Provider-sample1.xlsx")
 #replace all Nan values with -
 df = df.replace(np.nan, "-")
 
@@ -106,10 +106,13 @@ df_user_matrix = Assign.AssignWeight("crm", df_user_matrix, total_tools)
 #rename column Work phone
 df_user_matrix = df_user_matrix.rename(columns={' work phone':'workphone'})
 
+
 ## Assigning the extra value of 1 to all the weighted values 
 for i,item in enumerate(df_user_matrix):
     item = item.lstrip(" ")
+    
     if item in df_pro.columns:
+        print(item, df_pro[item].dtype)
         df_pro[item] = df_pro[item]+1
 
 #adding the recommended weighted sum to the original dataframe

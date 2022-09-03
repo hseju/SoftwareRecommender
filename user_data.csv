@@ -1,2 +1,2 @@
 ,data,contract,duration,price,Location,user,tools,features,crm
-0,"['Email', 'Work Phone']",['Annual'],['Flexible'],,['All'],4,['All'],['ContractEnrichment'],['All']
+0,['Work Phone'],['Monthly'],['Monthly'],800,['All'],8,['Outreach'],"['ContractEnrichment', 'IntentData']",['All']
