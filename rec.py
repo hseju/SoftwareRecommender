@@ -36,7 +36,6 @@ def get_results(df_user):
     ############################### Getting User data from Q/A ##########################
     #Getting user data
     #df_user = pd.read_csv("user_data.csv", index_col=0)
-    print(df_user)
     df_user['data'] = df_user['data'].item().replace("'", "").strip("[]").lower()
     df_user['data'] = df_user['data'].str.split(",")
     df_user['contract'] = df_user['contract'].item().replace("'", "").strip("[]")

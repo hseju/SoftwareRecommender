@@ -30,7 +30,10 @@ def home():
         df['data'] = [str(data)]
         df['contract'] = [str(contract)]
         df['duration']  = [str(duration)]
-        df['price']  = int(price)
+        if price != '':
+            df['price']  = int(price)
+        else:
+            df['price']  = price
         df['Location']  = [str(Location)]
         df['user'] = int(users) 
         df['tools'] = [str(tools)]
