@@ -1,2 +1,2 @@
-,data,contract,duration,price,Location,user,tools,features,crm
-0,['Mobile'],"['Monthly', 'Annual']",['Flexible'],,['All'],8,['All'],"['ContractEnrichment', 'IntentData']",['All']
+,data,contract,price,contacts,duration,Location,features,salesTeam,crm,SEPI_tools
+0,['email'],['Monthly'],,More than 5000,['Flexible'],['USA/NorthAmerica'],"['ContactEnrichment', 'IntentData']",['MidMarket'],"['Freshsales', 'SugarCRM', 'Zoho']",['Salesloft']

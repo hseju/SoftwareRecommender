@@ -1,7 +1,8 @@
 
+
 import pandas as pd
 from email.policy import default
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, get_flashed_messages, flash
 import os
 
 
@@ -17,29 +18,37 @@ def home():
     df = pd.DataFrame()
     
     if request.method == 'POST':
+
         data = request.form.getlist("data")
         contract = request.form.getlist("contract")
-        duration = request.form.getlist("duration")
         price = request.form['Amount']
+        contacts = request.form['contacts']
+        duration = request.form.getlist("duration")
         Location = request.form.getlist("Location")
-        users = request.form['users']
-        tools = request.form.getlist('tools')
         features = request.form.getlist('feature')
-        crm = request.form.getlist('integrate')
-
+        salesTeam = request.form.getlist('SalesTeam')
+        crm = request.form.getlist('CRM')
+        SEPI_tools = request.form.getlist('SEPI')
+        
+        
+        #create a dataframe
         df['data'] = [str(data)]
         df['contract'] = [str(contract)]
-        df['duration']  = [str(duration)]
+        
         if price != '':
             df['price']  = int(price)
         else:
             df['price']  = price
-        df['Location']  = [str(Location)]
-        df['user'] = int(users) 
-        df['tools'] = [str(tools)]
-        df['features'] = [str(features)]
-        df['crm'] = [str(crm)]
 
+        df['contacts']  = [str(contacts)]
+        df['duration']  = [str(duration)]
+        df['Location']  = [str(Location)]
+        df['features'] = [str(features)]
+        df['salesTeam'] = [str(salesTeam)]
+        df['crm'] = [str(crm)]
+        df['SEPI_tools'] = [str(SEPI_tools)]
+        
+        #export the dataframe to the csv file
         df.to_csv("user_data.csv")
         
         import rec
@@ -63,5 +72,5 @@ def result():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-
+    app.secret_key='12345'
     app.run(host="0.0.0.0", port=port, debug=True)

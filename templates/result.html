@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class="container">
-    <br/><br/>
+<div class="container ml-20">
+  <div class="row ml-5">
     <h2> These are the top 3 recommendations: </h2> <br><br>
     
     <table class="table table-hover">
@@ -42,9 +42,10 @@
       </table>
 
     <br/><br/>
-
-    <a class='btn btn-primary' href="{{ url_for('home') }}">Home</a>
-
+    
+  </div>
+    
+  <a class='btn btn-primary ml-5' href="{{ url_for('home') }}">Home</a>
     <br/><br/>
 </div>
 
