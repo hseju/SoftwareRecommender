@@ -60,7 +60,8 @@ def get_software_data(dataframe):
 
 
 def get_user_data_matrix(dataframe):
-
+    
+    
     for i, col in enumerate(dataframe.columns):
         if col not in ['price','contacts']:
             if dataframe[col][0][0] == '"i dont have any crm"' or dataframe[col][0][0] == '"i dont have a sales engagement platform"':
@@ -69,14 +70,15 @@ def get_user_data_matrix(dataframe):
                 if col in ['crm', 'SEPI_tools']:
                     total_tools = len(dataframe['SEPI_tools'].item()) + len(dataframe['crm'].item())
                     for index,row in dataframe.iterrows():
-                        for contract in row[col]:
-                            dataframe.at[index,contract] = 1/total_tools
+                        for item in row[col]:
+                            dataframe.at[index,item] = 1+(1/total_tools)
                 else:
                     for index,row in dataframe.iterrows():
-                        for contract in row[col]:
-                            dataframe.at[index,contract] =1
+                        for item in row[col]:
+                            dataframe.at[index,item] =1+(1/ len(dataframe[col]))
             
-
+    
+    
     #now drop all the initial columns that is not a matrix
     dataframe = dataframe.iloc[:,10:]
 
@@ -88,7 +90,7 @@ def get_user_data_matrix(dataframe):
     
     #lower casing all the column names
     dataframe.columns = dataframe.columns.str.strip(" ")
-    
+   
     
     if "crm" in dataframe.columns:
         dataframe.drop(['crm'], axis=1, inplace=True)
@@ -97,3 +99,4 @@ def get_user_data_matrix(dataframe):
         dataframe.drop(['SEPI_tools'], axis=1, inplace=True)
         
     return dataframe
+

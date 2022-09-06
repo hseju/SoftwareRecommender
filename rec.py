@@ -53,12 +53,19 @@ def get_results(df_user):
 
     df_user_matrix = Assign.get_user_data_matrix(df_user)
 
-    ## Assigning the extra value of 1 to all the weighted values 
+    #match columns and drop the ones that do not match
     for i,item in enumerate(df_pro):
-        if item in df_user_matrix.columns:
-            df_pro[item][0] = df_pro[item][0] * df_user_matrix[item][0]
-        else:
+        if item not in df_user_matrix.columns:
             df_pro.drop(item, axis=1, inplace=True)
+        else:
+            #for each company multiply the values of user matrix
+            for index in range(len(df_pro)):
+                df_pro[item][index] = df_pro[item][index] * df_user_matrix[item][0]
+            
+    #match columns and drop the ones that do not match
+    for i,item in enumerate(df_user_matrix):
+        if item not in df_pro.columns:
+            df_user_matrix.drop(item, axis=1, inplace=True)
 
 
     print(df_pro.sum(axis=1))
@@ -69,12 +76,15 @@ def get_results(df_user):
     df_soft['Pricing Range'] = df['Pricing Range']
 
     # Finally filtering out the products based on pricing
-    if "monthly" in df_user['duration'].item():
-        result = df_soft[df_soft['Starting Price - Monthly'] <= df_user['price'].item()].sort_values(by='Starting Price - Monthly', ascending=True)
-    elif "annual" in df_user['duration'].item():
-        result = df_soft[df_soft['Starting Price - Annually'] <= df_user['price'].item()].sort_values(by='Starting Price - Annually', ascending=True)
+    if str(df_user['price'].item()) not in ["nan"]:
+        if "monthly" in df_user['duration'].item():
+            result = df_soft[df_soft['Starting Price - Monthly'] <= df_user['price'].item()].sort_values(by='Starting Price - Monthly', ascending=True)
+        elif "annual" in df_user['duration'].item():
+            result = df_soft[df_soft['Starting Price - Annually'] <= df_user['price'].item()].sort_values(by='Starting Price - Annually', ascending=True)
+        else:
+            result = df_soft.sort_values(by='Starting Price - Monthly', ascending=True)
     else:
-        result = df_soft.sort_values(by='Starting Price - Monthly', ascending=False)
+        result = df_soft.sort_values(by='recommend', ascending=False)
 
 
     #filtering top three
