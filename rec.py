@@ -25,7 +25,7 @@ def get_results(df_user):
     df_soft = df.drop(['Additional Pricing Info','Website','Unlimited Data Plan', 'Pricing Range', 'Pricing comments','Free Trial','Other'], axis=1)
 
     #drop the pricing from data and this can be used to create a feature matrix
-    df_pro = df_soft.drop(['Starting Price - Monthly', 'Starting Price - Annually'], axis=1)
+    df_pro = df_soft.drop(['Starting Price - Monthly', 'Starting Price - Annually','Price_min','Price_max'], axis=1)
 
     
 
@@ -37,7 +37,7 @@ def get_results(df_user):
     #Getting user data
     #df_user = pd.read_csv("user_data.csv", index_col=0)
     
-
+    print(df_user)
     for i, col in enumerate(df_user.columns):
         if df_user[col].dtype == "int64":
             pass
@@ -72,21 +72,31 @@ def get_results(df_user):
 
 
     print(df_pro.sum(axis=1))
-
+    
+    
     #adding the recommended weighted sum to the original dataframe
     df_soft['recommend']= df_pro.sum(axis=1)
     #add back the pricing range column 
     df_soft['Pricing Range'] = df['Pricing Range']
-
+    
+    print(df_user['price'].item())
     # Finally filtering out the products based on pricing
-    if str(df_user['price'].item()) not in ["nan"]:
+    if df_user['price'].item() != ['']:
         if "monthly" in df_user['duration'].item():
-            result = df_soft[df_soft['Starting Price - Monthly'] <= df_user['price'].item()].sort_values(by='Starting Price - Monthly', ascending=False)
+            if df_user['Location'][0] != ['']:
+                result = df_soft[df_soft['Starting Price - Monthly'] <= df_user['price'].item()].sort_values(by=['location','Starting Price - Monthly'], ascending=[False,False])
+            else:
+                result = df_soft[df_soft['Starting Price - Monthly'] <= df_user['price'].item()].sort_values(by='Starting Price - Monthly', ascending=False)
         elif "annual" in df_user['duration'].item():
-            result = df_soft[df_soft['Starting Price - Annually'] <= df_user['price'].item()].sort_values(by='Starting Price - Annually', ascending=False)
+            if df_user['Location'][0] != ['']:
+                result = df_soft[df_soft['Starting Price - Annually'] <= df_user['price'].item()].sort_values(by=['location','Starting Price - Annually'], ascending=[False,False])
+            else:
+                result = df_soft[df_soft['Starting Price - Annually'] <= df_user['price'].item()].sort_values(by='Starting Price - Annually', ascending=False)
         else:
+            print("with nan")
             result = df_soft.sort_values(by='Starting Price - Monthly', ascending=False)
     else:
+        print("without nan")
         result = df_soft.sort_values(by='recommend', ascending=False)
 
 

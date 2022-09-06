@@ -2,41 +2,54 @@
 
 {% block content %}
 
-<div class="container ml-20">
+<div class="container ml-20 mr-20">
   <div class="row ml-5">
-    <h2> These are the top 3 recommendations: </h2> <br><br>
+    <h2> These are the top 3 recommendations: </h2> 
     
-    <table class="table table-hover">
+    <br/>
+    <table class="table table-hover mt-5">
+      <!-- Table head -->
         <thead>
           <tr>
+            <th scope="col">Rank</th>
             <th scope="col">Company</th>
             <th scope="col">{{company.columns[0]}}</th>
             <th scope="col">{{company.columns[1]}}</th>
             <th scope="col">{{company.columns[-1]}}</th>
-            <th scope="col">Tools CRM..etc</th>
+            <th scope="col">CRM and Sales <br>Engagement Platform Integrations</th>
+            <th scope="col">Prospects Location</th>
           </tr>
         </thead>
-        <tbody>
+      <!-- Table head -->
+
+
+        <tbody> 
           <tr>
-            <th scope="row">{{company.index[0]}}</th>
+            <th scope="row">1</th>
+            <td><i class="fas fa-graduation-cap mr-2 grey-text" aria-hidden="true"></i>{{company.index[0]}}</td>
             <td>{{company.iloc[0,0]}}</td>
             <td>{{company.iloc[0,1]}}</td>
             <td>{{company.iloc[0,-1]}}</td>
-            <td>{{(company['CRM Integrations']+ "," + company['SEPI'])[0]}}</td>
+            <td>{{company['CRM Integrations'][0]+ ","}}<br> {{company['SEPI'][0]}}</td>
+            <td>{{company['location'][0]}}</td>
           </tr>
           <tr>
-            <th scope="row">{{company.index[1]}}</th>
+            <th scope="row">2</th>
+            <td>{{company.index[1]}}</td>
             <td>{{company.iloc[1,0]}}</td>
             <td>{{company.iloc[1,1]}}</td>
             <td>{{company.iloc[1,-1]}}</td>
-            <td>{{(company['CRM Integrations']+ "," + company['SEPI'])[1]}}</td>
+            <td>{{company['CRM Integrations'][1]+ "," }}<br> {{company['SEPI'][1]}}</td>
+            <td>{{company['location'][1]}}</td>
           </tr>
           <tr>
-            <th scope="row">{{company.index[2]}}</th>
+            <th scope="row">3</th>
+            <td>{{company.index[2]}}</td>
             <td>{{company.iloc[2,0]}}</td>
             <td>{{company.iloc[2,1]}}</td>
             <td>{{company.iloc[2,-1]}}</td>
-            <td>{{(company['CRM Integrations']+ "," + company['SEPI'])[2]}}</td>
+            <td>{{company['CRM Integrations'][2]+ ","}}<br> {{company['SEPI'][2]}}</td>
+            <td>{{company['location'][2]}}</td>
           </tr>
         </tbody>
       </table>
@@ -44,9 +57,121 @@
     <br/><br/>
     
   </div>
-    
-  <a class='btn btn-primary ml-5' href="{{ url_for('home') }}">Home</a>
-    <br/><br/>
+   
+
+  <h4 style="margin: 20px 20px 50px 50px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: normal; font-size:18px; ">Need more help deciding which software is a
+     good fit before you talk to sales <i class="bi bi-patch-question"></i> <br><br>
+     <span>We can help.</span>   <br><br>
+     Submit your contact information and we'll be in touch. <i class="bi bi-bezier2"></i></h4>
+
+
+  <!--Section: Contact v.2-->
+
+<div class="card shadow p-3 mb-5 bg-body rounded ml-5">
+  <div class="card-body">
+<section class="mb-4">
+
+  <!--Section heading-->
+  <h2 class="h1-responsive font-weight-bold my-4 text-start" style="color: rgb(232, 143, 143);">Contact us</h2>
+  <!--Section description-->
+  <!-- <p class="text-center w-responsive mx-auto mb-5">Need more help deciding which software is a good fit before you talk to sales
+    We can help. Submit your contact information and we'll be in touch. <i class="bi bi-bezier2"></i></p> -->
+
+  <div class="row">
+
+      <!--Grid column-->
+      <div class="col-md-9 mb-md-0 mb-5">
+          <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+
+              <!--Grid row-->
+              <div class="row">
+
+                  <!--Grid column-->
+                  <div class="col-md-6">
+                      <div class="md-form mb-0">
+                          <input type="text" id="name" name="name" class="form-control">
+                          <label for="name" class="">Your name</label>
+                      </div>
+                  </div>
+                  <!--Grid column-->
+
+                  <!--Grid column-->
+                  <div class="col-md-6">
+                      <div class="md-form mb-0">
+                          <input type="text" id="email" name="email" class="form-control">
+                          <label for="email" class="">Your email</label>
+                      </div>
+                  </div>
+                  <!--Grid column-->
+
+              </div>
+              <!--Grid row-->
+
+              <!--Grid row-->
+              <div class="row mt-3">
+                  <div class="col-md-12">
+                      <div class="md-form mb-0">
+                          <input type="text" id="subject" name="subject" class="form-control">
+                          <label for="subject" class="">Subject</label>
+                      </div>
+                  </div>
+              </div>
+              <!--Grid row-->
+
+              <!--Grid row-->
+              <div class="row mt-3">
+
+                  <!--Grid column-->
+                  <div class="col-md-12">
+
+                      <div class="md-form">
+                          <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                          <label for="message">Your message</label>
+                      </div>
+
+                  </div>
+              </div>
+              <!--Grid row-->
+
+          </form>
+
+          <div class="text-center text-md-left">
+              <a class="btn btn-primary " onclick="document.getElementById('contact-form').submit();"> Send</a>
+          </div>
+          <div class="status"></div>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <!-- <div class="col-md-3 text-center">
+          <ul class="list-unstyled mb-0">
+              <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                  <p>San Francisco, CA 94126, USA</p>
+              </li>
+
+              <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                  <p>+ 01 234 567 89</p>
+              </li>
+
+              <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                  <p>contact@mdbootstrap.com</p>
+              </li>
+          </ul>
+      </div> -->
+      <!--Grid column-->
+
+  </div>
+
+</section>
+<!--Section: Contact v.2-->
+
+  </div>
+</div>
+
+
+
+  <!-- <a class='btn btn-primary ml-5' href="{{ url_for('home') }}">Home</a>
+    <br/><br/> -->
 </div>
 
 {% endblock %}

@@ -36,11 +36,11 @@ def get_software_data(dataframe):
     for i, col in enumerate(dataframe.columns):
 
         for index,row in dataframe.iterrows():
-            for contract in row[col]:
+            for column in row[col]:
                 if (dataframe.at[index,col] == "Yes") or (dataframe.at[index,col] == "No"):
                     pass
                 else:
-                    dataframe.at[index,contract] =1
+                    dataframe.at[index,column] =1
 
     #replace the Yes and no values to 1 and 0 respectively for ContactEnrichment and IntentData columns
     dataframe = dataframe.replace('Yes', 1.0)
@@ -55,7 +55,7 @@ def get_software_data(dataframe):
 
     #lower casing all the column names
     dataframe.columns = dataframe.columns.str.lower()
-
+    dataframe.columns = dataframe.columns.str.replace(" ","")
     return dataframe
 
 
@@ -72,6 +72,11 @@ def get_user_data_matrix(dataframe):
                     for index,row in dataframe.iterrows():
                         for item in row[col]:
                             dataframe.at[index,item] = 1+(1/total_tools)
+                elif col in ['Location']:
+                    total_tools = len(dataframe['SEPI_tools'].item()) + len(dataframe['crm'].item())
+                    for index,row in dataframe.iterrows():
+                        for item in row[col]:
+                            dataframe.at[index,item] = 1.5+(1/len(dataframe[col]))
                 else:
                     for index,row in dataframe.iterrows():
                         for item in row[col]:

@@ -103,7 +103,7 @@ def home():
         
         import rec
         result_final = rec.get_results(df)
-        return render_template("result.html", company = result_final)
+        return render_template("result.html", company = result_final, user_data= df)
          
     else:
         
@@ -118,6 +118,7 @@ def result():
         return render_template("home.html")
     
     return render_template("result.html")
+
 
 
 #run the application
