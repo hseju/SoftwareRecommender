@@ -1,6 +1,9 @@
 
 
 
+from pickle import FALSE
+
+
 def get_results(df_user):
 
 
@@ -78,11 +81,11 @@ def get_results(df_user):
     # Finally filtering out the products based on pricing
     if str(df_user['price'].item()) not in ["nan"]:
         if "monthly" in df_user['duration'].item():
-            result = df_soft[df_soft['Starting Price - Monthly'] <= df_user['price'].item()].sort_values(by='Starting Price - Monthly', ascending=True)
+            result = df_soft[df_soft['Starting Price - Monthly'] <= df_user['price'].item()].sort_values(by='Starting Price - Monthly', ascending=False)
         elif "annual" in df_user['duration'].item():
-            result = df_soft[df_soft['Starting Price - Annually'] <= df_user['price'].item()].sort_values(by='Starting Price - Annually', ascending=True)
+            result = df_soft[df_soft['Starting Price - Annually'] <= df_user['price'].item()].sort_values(by='Starting Price - Annually', ascending=False)
         else:
-            result = df_soft.sort_values(by='Starting Price - Monthly', ascending=True)
+            result = df_soft.sort_values(by='Starting Price - Monthly', ascending=False)
     else:
         result = df_soft.sort_values(by='recommend', ascending=False)
 
