@@ -125,9 +125,7 @@ def contact():
     message = "you have been subscribed"
 
     server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
-    server.login("hardik123seju@gmail.com", "Atomicaxe123")
-    server.sendmail("hardik123seju@gmail.com", "Atomicaxe123")
+   
     
     if request.method == 'POST':
     #   return render_template("result")
