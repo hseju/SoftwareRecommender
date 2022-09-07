@@ -127,8 +127,11 @@ def get_price_match(df_1, df_2):
             diff = 0
             df_1['closet_price_diff'][i] = 50000
             for j in range(len(df_1['Starting Price - Annually'][i])):
-                diff =  abs(df_2['price'][0] - int(df_1['Starting Price - Annually'][i][j]))
-                if diff < df_1['closet_price_diff'][i]: 
-                    df_1['closet_price_diff'][i] = diff
+                try:
+                    diff =  abs(df_2['price'][0] - int(df_1['Starting Price - Annually'][i][j]))
+                    if diff < df_1['closet_price_diff'][i]: 
+                        df_1['closet_price_diff'][i] = diff
+                except:
+                    pass
         
     return df_1
