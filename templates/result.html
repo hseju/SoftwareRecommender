@@ -15,7 +15,7 @@
             <th scope="col">Company</th>
             <th scope="col">{{company.columns[0]}}</th>
             <th scope="col">{{company.columns[1]}}</th>
-            <th scope="col">{{company.columns[-1]}}</th>
+            <th scope="col">{{company.columns[-2]}}</th>
             <th scope="col">CRM and Sales <br>Engagement Platform Integrations</th>
             <th scope="col">Prospects Location</th>
           </tr>
@@ -29,7 +29,7 @@
             <td><i class="fas fa-graduation-cap mr-2 grey-text" aria-hidden="true"></i>{{company.index[0]}}</td>
             <td>{{company.iloc[0,0]}}</td>
             <td>{{company.iloc[0,1]}}</td>
-            <td>{{company.iloc[0,-1]}}</td>
+            <td>{{company.iloc[0,-2]}}</td>
             <td>{{company['CRM Integrations'][0]+ ","}}<br> {{company['SEPI'][0]}}</td>
             <td>{{company['location'][0]}}</td>
           </tr>
@@ -38,7 +38,7 @@
             <td>{{company.index[1]}}</td>
             <td>{{company.iloc[1,0]}}</td>
             <td>{{company.iloc[1,1]}}</td>
-            <td>{{company.iloc[1,-1]}}</td>
+            <td>{{company.iloc[1,-2]}}</td>
             <td>{{company['CRM Integrations'][1]+ "," }}<br> {{company['SEPI'][1]}}</td>
             <td>{{company['location'][1]}}</td>
           </tr>
@@ -47,7 +47,7 @@
             <td>{{company.index[2]}}</td>
             <td>{{company.iloc[2,0]}}</td>
             <td>{{company.iloc[2,1]}}</td>
-            <td>{{company.iloc[2,-1]}}</td>
+            <td>{{company.iloc[2,-2]}}</td>
             <td>{{company['CRM Integrations'][2]+ ","}}<br> {{company['SEPI'][2]}}</td>
             <td>{{company['location'][2]}}</td>
           </tr>
@@ -81,8 +81,8 @@
 
       <!--Grid column-->
       <div class="col-md-9 mb-md-0 mb-5">
-          <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-
+          <form id="contact-form" name="contact-form" action="/contact" method="POST">
+          <!-- <form id="contact-form" action="mail.php" name="contact-form" > -->
               <!--Grid row-->
               <div class="row">
 
@@ -135,10 +135,26 @@
 
           </form>
 
-          <div class="text-center text-md-left">
-              <a class="btn btn-primary " onclick="document.getElementById('contact-form').submit();"> Send</a>
+
+          <div class="text-left text-md-left mt-3">
+            <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
           </div>
           <div class="status"></div>
+
+
+
+
+
+
+          {% if error %}
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+              <div>
+                {{error}}
+              </div>
+            </div>
+          
+          {% endif %}
       </div>
       <!--Grid column-->
 

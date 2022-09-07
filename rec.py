@@ -81,23 +81,17 @@ def get_results(df_user):
     
     print(df_user['price'].item())
     # Finally filtering out the products based on pricing
-    if df_user['price'].item() != ['']:
-        if "monthly" in df_user['duration'].item():
-            if df_user['Location'][0] != ['']:
-                result = df_soft[df_soft['Starting Price - Monthly'] <= df_user['price'].item()].sort_values(by=['location','Starting Price - Monthly'], ascending=[False,False])
-            else:
-                result = df_soft[df_soft['Starting Price - Monthly'] <= df_user['price'].item()].sort_values(by='Starting Price - Monthly', ascending=False)
-        elif "annual" in df_user['duration'].item():
-            if df_user['Location'][0] != ['']:
-                result = df_soft[df_soft['Starting Price - Annually'] <= df_user['price'].item()].sort_values(by=['location','Starting Price - Annually'], ascending=[False,False])
-            else:
-                result = df_soft[df_soft['Starting Price - Annually'] <= df_user['price'].item()].sort_values(by='Starting Price - Annually', ascending=False)
+    df_soft = Assign.get_price_match(df_soft, df_user)
+    
+    #filtering and sorting to provide the best results
+    if str(df_user['price'].item()) not in ["nan"]:
+        if df_user['Location'][0] != ['']:
+            result = df_soft.sort_values(by=['location','closet_price_diff'], ascending=[False,True])
         else:
-            print("with nan")
-            result = df_soft.sort_values(by='Starting Price - Monthly', ascending=False)
+            result = df_soft.sort_values(by='closet_price_diff', ascending=True)
     else:
-        print("without nan")
         result = df_soft.sort_values(by='recommend', ascending=False)
+
 
 
     #filtering top three

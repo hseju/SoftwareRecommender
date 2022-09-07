@@ -1,5 +1,6 @@
 
 import email
+import smtplib
 from unicodedata import name
 import pandas as pd
 from email.policy import default
@@ -56,6 +57,13 @@ class CustomerData(db.Model):
 #home page
 @app.route("/", methods = ['GET', 'POST'])
 def home():
+    
+    return render_template("home.html")
+
+
+
+@app.route("/result", methods=['GET', 'POST'])
+def result():
     #create empty dataframe to store user answers
     df = pd.DataFrame()
     
@@ -73,7 +81,8 @@ def home():
         SEPI_tools = request.form.getlist('SEPI')
         name = request.form.get("CustomerName")
         email = request.form.get("email")
-        date = datetime.date
+        date = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+        
         Customer_data = CustomerData(name, email,date, data, contract, price,contacts, duration,Location, features,salesTeam,crm,SEPI_tools)
         try:
             db.session.add(Customer_data)
@@ -106,20 +115,33 @@ def home():
         return render_template("result.html", company = result_final, user_data= df)
          
     else:
-        
-        return render_template("home.html")
-
-
-#results page
-@app.route("/result", methods=['GET', 'POST'])
-def result():
-
-    if request.method == 'POST':
-        return render_template("home.html")
     
+        return render_template("home.html")
+
+
+@app.route("/contact", methods=['GET', 'POST'])
+def contact():
+
+    message = "you have been subscribed"
+
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login("hardik123seju@gmail.com", "Atomicaxe123")
+    server.sendmail("hardik123seju@gmail.com", "Atomicaxe123")
+    
+    if request.method == 'POST':
+    #   return render_template("result")
+        user_name = request.form.get("name")
+        email = request.form.get("email")
+        subject = request.form.get("subject")
+        message = request.form.get("message")
+        return render_template("contact.html",user_name=user_name, email=email,message=message )
+    
+    # if not user_name or not email or not subject or not message:
+    #     error = "All details required.."
+    #     return render_template("result.html", error = error)
+
     return render_template("result.html")
-
-
 
 #run the application
 if __name__ == "__main__":

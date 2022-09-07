@@ -5,7 +5,7 @@
 
 
 <div class="container ">
-    <form action="/" method="POST">
+    <form action="/result" method="POST">
         <div class="form-group ">
             <!-- Error message flash -->
             {% for message in get_flashed_messages() %}
@@ -111,7 +111,7 @@
                     <!-- <input type="text" class="form-control is-valid-control" id="validationServer01"  placeholder="Enter amount" name="net_month_income", value = "{{ email }}"> -->
                     <br />
                     <select class="selectpicker mw-3 ml-3" data-width="50%" aria-label="Default select example" name="contacts">
-                        <option value ="" selected>Select any one</option>
+                        <option value ="" >Select any one</option>
                         <option value="Not sure">Not sure</option>
                         <option value="100">100</option>
                         <option value="100-500">100-500</option>
@@ -141,7 +141,7 @@
                     </div>
                     <div class="form-check ml-3">
                         <input class="form-check-input" type="radio" id="inlineCheckbox12" value="Global" name="Location">
-                        <label class="form-check-label" for="inlineCheckbox12">Global</label>
+                        <label class="form-check-label" for="inlineCheckbox12">USA/North America and International</label>
                     </div>
                 </div>
 
@@ -191,9 +191,9 @@
                     <label class="fw-bold" for="validationServer01"> 8. What CRM do you use? </label>
                     <!-- <input type="text" class="form-control is-valid-control" id="validationServer01"  placeholder="Enter amount" name="net_month_income", value = "{{ email }}"> -->
                     <br /><br />
-                    <select class="selectpicker mw-3 ml-3" data-size="5" multiple data-live-search="true" data-width="50%" name="CRM">
-                        <option value = "" selected>None Selected</option>
-                        <option>I don't have any CRM</option>
+                    <select class="selectpicker mw-3 ml-3" data-size="5" multiple data-actions-box="true" multiple data-live-search="true" data-width="50%" name="CRM">
+                        
+                        <option data-divider="true">I don't have any CRM</option>
                         <option>Salesforce</option>
                         <option>HubSpot</option>
                         <option>Pipedrive</option>
@@ -220,9 +220,9 @@
                     <label class="fw-bold" for="validationServer01"> 9. What sales engagement platform do you use?</label>
                     <!-- <input type="text" class="form-control is-valid-control" id="validationServer01"  placeholder="Enter amount" name="net_month_income", value = "{{ email }}"> -->
                     <br /><br />
-                    <select class="selectpicker ml-3" data-size="5" multiple data-live-search="true" data-width="50%" name="SEPI">
-                        <option value = "" selected>None Selected</option>
-                        <option>I don't have a sales engagement platform</option>
+                    <select class="selectpicker ml-3" data-size="5" multiple data-actions-box="true" multiple data-live-search="true" data-width="50%" name="SEPI">
+                        <option selected="true">I don't have a sales engagement platform</option>
+                        <option  multiple data-actions-box="true" data-divider="true"></option>
                         <option>Salesloft</option>
                         <option>Outreach</option>
                         <option>Yesware</option>
@@ -260,7 +260,7 @@
         </div>
 
 
-        <button align="center" type="submit" class="btn btn-primary ml-5">Submit</button>
+        <button align="center" type="submit" class="btn btn-primary ml-5" >Submit</button>
 
         
     </form>

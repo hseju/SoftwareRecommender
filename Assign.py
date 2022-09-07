@@ -105,3 +105,30 @@ def get_user_data_matrix(dataframe):
         
     return dataframe
 
+
+def get_price_match(df_1, df_2):
+    
+    df_1['Starting Price - Monthly'] = df_1['Starting Price - Monthly'].str.replace(" ","").str.split(",")
+    df_1['Starting Price - Annually'] = df_1['Starting Price - Annually'].str.replace(" ","").str.split(",")
+    df_1['closet_price_diff'] = 0
+    if "monthly" in df_2['duration'].item():
+        
+        for i in range(len(df_1)):
+            diff = 0
+            df_1['closet_price_diff'][i] = 50000
+            
+            for j in range(len(df_1['Starting Price - Monthly'][i])):
+                diff =  abs(df_2['price'][0] - int(df_1['Starting Price - Monthly'][i][j]))
+                if diff < df_1['closet_price_diff'][i]: 
+                    df_1['closet_price_diff'][i] = diff
+    else:
+        
+        for i in range(len(df_1)):
+            diff = 0
+            df_1['closet_price_diff'][i] = 50000
+            for j in range(len(df_1['Starting Price - Annually'][i])):
+                diff =  abs(df_2['price'][0] - int(df_1['Starting Price - Annually'][i][j]))
+                if diff < df_1['closet_price_diff'][i]: 
+                    df_1['closet_price_diff'][i] = diff
+        
+    return df_1

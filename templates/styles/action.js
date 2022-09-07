@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 function validateForm() {
+    console.log("In validate")
     var name =  document.getElementById('name').value;
     if (name == "") {
         document.querySelector('.status').innerHTML = "Name cannot be empty";
@@ -34,3 +35,27 @@ function validateForm() {
     }
     document.querySelector('.status').innerHTML = "Sending...";
   }
+
+
+$('.selectpicker').selectpicker({
+    liveSearch:true,
+    showTick:false
+});
+
+$(document).on('click', '.dropdown-menu li', function(event){
+    if($(this).hasClass('active')){
+  $(this).parent().prev('div').parent().next('select').selectpicker('val',''); } 
+});
+
+$(document).bind("keyup",".dropdown-menu li", function(e){
+    var activeIndex = $(".dropdown-menu li.active").data('original-index');
+    var selectedIndex = $(".dropdown-menu li.selected").data('original-index');
+    if(e.which == 13){
+       if(selectedIndex == activeIndex){
+          $(".dropdown-menu li.active").find("a").trigger('click');
+       
+       } else {
+          $(".dropdown-menu li.active").removeClass('active').find("a").trigger('click'); 
+       }
+    }
+});
