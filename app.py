@@ -118,13 +118,12 @@ def result():
             error = "All details required.."
             return render_template("contact.html", error = error)
 
-        server = smtplib.SMTP("smtp-mail.outlook.com:587")
-        server.starttls()
-        message = "Hello welcome"
-        print(user_name,email,subject,message)
-        server.login("recommender.sales@outlook.com", passwrd.PASS)
-        server.send_message(message,"recommender.sales@outlook.com", email)
-        server.quit()
+        # server = smtplib.SMTP("smtp-mail.outlook.com:587")
+        # server.starttls()
+        
+        # server.login("recommender.sales@outlook.com", passwrd.PASS)
+        # server.sendmail("recommender.sales@outlook.com", email, message)
+        # server.quit()
 
 
         return render_template("contact.html",user_name=user_name, email=email,subject=subject,message=message )
