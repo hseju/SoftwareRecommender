@@ -8,6 +8,7 @@ from flask import Flask, render_template, request, redirect, get_flashed_message
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import passwrd
 
 #create an instance of app
 app = Flask(__name__)
@@ -121,7 +122,7 @@ def result():
         server.starttls()
         message = "Hello welcome"
         print(user_name,email,subject,message)
-        server.login("recommender.sales@outlook.com", os.environ.get("PASS"))
+        server.login("recommender.sales@outlook.com", passwrd.PASS)
         server.send_message(message,"recommender.sales@outlook.com", email)
         server.quit()
 
