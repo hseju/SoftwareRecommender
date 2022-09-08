@@ -106,12 +106,18 @@ def get_user_data_matrix(dataframe):
     return dataframe
 
 
+
 def get_price_match(df_1, df_2):
     
     df_1['Starting Price - Monthly'] = df_1['Starting Price - Monthly'].str.replace(" ","").str.split(",")
     df_1['Starting Price - Annually'] = df_1['Starting Price - Annually'].str.replace(" ","").str.split(",")
+    #create a column that has difference of price between the input budget and available plans 
+    #set initial values to zero
     df_1['closet_price_diff'] = 0
-    if "monthly" in df_2['duration'].item():
+
+    #loop through each price in the list for a given product and get the difference
+    #Assign the lowest price difference to the newly created column 
+    if "monthly" in df_2['duration'].item() and len(df_2['duration'].item())==1:
         
         for i in range(len(df_1)):
             diff = 0
@@ -121,7 +127,7 @@ def get_price_match(df_1, df_2):
                 diff =  abs(df_2['price'][0] - int(df_1['Starting Price - Monthly'][i][j]))
                 if diff < df_1['closet_price_diff'][i]: 
                     df_1['closet_price_diff'][i] = diff
-    else:
+    elif "annual" in df_2['duration'].item() and len(df_2['duration'].item())==1 :
         
         for i in range(len(df_1)):
             diff = 0
@@ -133,5 +139,7 @@ def get_price_match(df_1, df_2):
                         df_1['closet_price_diff'][i] = diff
                 except:
                     pass
+    else:
+        pass
         
     return df_1

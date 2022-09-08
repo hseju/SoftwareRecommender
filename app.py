@@ -4,13 +4,14 @@ import smtplib
 from unicodedata import name
 import pandas as pd
 from email.policy import default
-from flask import Flask, render_template, request, redirect, get_flashed_messages, flash
+from flask import Flask, render_template, request, redirect, get_flashed_messages, flash 
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 #create an instance of app
 app = Flask(__name__)
+
 
 
 #config the URI to the database
@@ -36,34 +37,11 @@ class CustomerData(db.Model):
     SEPI_tools = db.Column(db.String(200))
 
 
-    #create a function to return a string when we add something
-    def __init__(self, name, email, date_created, data, contract,price, contacts,duration,Location, features,salesTeam,crm, SEPI_tools):
-        self.name = name
-        self.email = email
-        self.date_created = date_created
-        self.data = data
-        self.contract = contract
-        self.price = price
-        self.contacts = contacts
-        self.duration = duration
-        self.Location = Location
-        self.features = features
-        self.salesTeam = salesTeam
-        self.crm = crm
-        self.SEPI_tools = SEPI_tools
-
-
 
 #home page
 @app.route("/", methods = ['GET', 'POST'])
 def home():
-    
-    return render_template("home.html")
 
-
-
-@app.route("/result", methods=['GET', 'POST'])
-def result():
     #create empty dataframe to store user answers
     df = pd.DataFrame()
     
@@ -81,14 +59,13 @@ def result():
         SEPI_tools = request.form.getlist('SEPI')
         name = request.form.get("CustomerName")
         email = request.form.get("email")
-        date = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
         
-        Customer_data = CustomerData(name, email,date, data, contract, price,contacts, duration,Location, features,salesTeam,crm,SEPI_tools)
-        try:
-            db.session.add(Customer_data)
-            db.session.commit()
-        except:
-            "Error storing the data"
+        
+        #Customer_data = CustomerData(name, email,date, data, contract, price,contacts, duration,Location, features,salesTeam,crm,SEPI_tools)
+        customer_data = CustomerData(name = name, email=email, price=price) 
+        db.session.add(customer_data)
+        db.session.commit()
+        
 
         #create a dataframe
         df['data'] = [str(data)]
@@ -118,11 +95,13 @@ def result():
     
         return render_template("home.html")
 
+    
+    return render_template("home.html")
 
-@app.route("/contact", methods=['GET', 'POST'])
-def contact():
 
-    message = "you have been subscribed"
+
+@app.route("/result", methods=['GET', 'POST'])
+def result():
 
     server = smtplib.SMTP("smtp.gmail.com", 587)
    
@@ -133,13 +112,30 @@ def contact():
         email = request.form.get("email")
         subject = request.form.get("subject")
         message = request.form.get("message")
-        return render_template("contact.html",user_name=user_name, email=email,message=message )
+        
+        if user_name==[''] or email==[''] or subject=='' or message=='':
+            error = "All details required.."
+            return render_template("contact.html", error = error)
+
+        server = smtplib.SMTP("smtp-mail.outlook.com:587")
+        server.starttls()
+        message = "Hello welcome"
+        print(user_name,email,subject,message)
+        server.login("recommender.sales@outlook.com", os.environ.get("PASS"))
+        server.send_message(message,"recommender.sales@outlook.com", email)
+        server.quit()
+
+
+        return render_template("contact.html",user_name=user_name, email=email,subject=subject,message=message )
     
     # if not user_name or not email or not subject or not message:
     #     error = "All details required.."
     #     return render_template("result.html", error = error)
 
     return render_template("result.html")
+
+    
+
 
 #run the application
 if __name__ == "__main__":
