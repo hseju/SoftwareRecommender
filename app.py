@@ -8,7 +8,6 @@ from flask import Flask, render_template, request, redirect, get_flashed_message
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import passwrd
 
 #create an instance of app
 app = Flask(__name__)
