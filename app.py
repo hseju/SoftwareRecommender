@@ -128,15 +128,10 @@ def result():
 
         return render_template("contact.html",user_name=user_name, email=email,subject=subject,message=message )
     
-    # if not user_name or not email or not subject or not message:
-    #     error = "All details required.."
-    #     return render_template("result.html", error = error)
 
     return render_template("result.html")
 
     
-
-
 #run the application
 if __name__ == "__main__":
     db.create_all()
