@@ -12,10 +12,10 @@
         <thead>
           <tr>
             <th scope="col">Rank</th>
-            <th scope="col">Company</th>
             <th scope="col">{{company.columns[0]}}</th>
             <th scope="col">{{company.columns[1]}}</th>
-            <th scope="col">{{company.columns[-2]}}</th>
+            <th scope="col">{{company.columns[2]}}</th>
+            <th scope="col">{{company.columns[-3]}}</th>
             <th scope="col">CRM and Sales <br>Engagement Platform Integrations</th>
             <th scope="col">Prospects Location</th>
           </tr>
@@ -26,29 +26,52 @@
         <tbody> 
           <tr>
             <th scope="row">1</th>
-            <td><i class="fas fa-graduation-cap mr-2 grey-text" aria-hidden="true"></i>{{company.index[0]}}</td>
+            <!-- <td><i class="fas fa-graduation-cap mr-2 grey-text" aria-hidden="true"></i>{{company.index[0]}}</td> -->
             <td>{{company.iloc[0,0]}}</td>
             <td>{{company.iloc[0,1]}}</td>
-            <td>{{company.iloc[0,-2]}}</td>
+            <td>{{company.iloc[0,2]}}</td>
+            <td>{{company.iloc[0,-3]}}</td>
             <td>{{company['CRM Integrations'][0]+ ","}}<br> {{company['SEPI'][0]}}</td>
             <td>{{company['location'][0]}}</td>
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>{{company.index[1]}}</td>
+            <!-- <td>{{company.index[1]}}</td> -->
             <td>{{company.iloc[1,0]}}</td>
             <td>{{company.iloc[1,1]}}</td>
-            <td>{{company.iloc[1,-2]}}</td>
+            <td>{{company.iloc[1,2]}}</td>
+            <td>{{company.iloc[1,-3]}}</td>
             <td>{{company['CRM Integrations'][1]+ "," }}<br> {{company['SEPI'][1]}}</td>
             <td>{{company['location'][1]}}</td>
           </tr>
           <tr>
             <th scope="row">3</th>
-            <td>{{company.index[2]}}</td>
+            <!-- <td>{{company.index[2]}}</td> -->
             <td>{{company.iloc[2,0]}}</td>
             <td>{{company.iloc[2,1]}}</td>
-            <td>{{company.iloc[2,-2]}}</td>
+            <td>{{company.iloc[2,2]}}</td>
+            <td>{{company.iloc[2,-3]}}</td>
             <td>{{company['CRM Integrations'][2]+ ","}}<br> {{company['SEPI'][2]}}</td>
+            <td>{{company['location'][2]}}</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <!-- <td>{{company.index[3]}}</td> -->
+            <td>{{company.iloc[3,0]}}</td>
+            <td>{{company.iloc[3,1]}}</td>
+            <td>{{company.iloc[3,2]}}</td>
+            <td>{{company.iloc[3,-3]}}</td>
+            <td>{{company['CRM Integrations'][3]+ ","}}<br> {{company['SEPI'][3]}}</td>
+            <td>{{company['location'][2]}}</td>
+          </tr>
+          <tr>
+            <th scope="row">5</th>
+            <!-- <td>{{company.index[4]}}</td> -->
+            <td>{{company.iloc[4,0]}}</td>
+            <td>{{company.iloc[4,1]}}</td>
+            <td>{{company.iloc[4,2]}}</td>
+            <td>{{company.iloc[4,-3]}}</td>
+            <td>{{company['CRM Integrations'][4]+ ","}}<br> {{company['SEPI'][4]}}</td>
             <td>{{company['location'][2]}}</td>
           </tr>
         </tbody>
@@ -69,118 +92,63 @@
 
     <div class="card shadow p-3 mb-5 bg-body rounded ml-5">
       <div class="card-body">
-    <section class="mb-4">
+          <section class="mb-4">
 
-      <!--Section heading-->
-      <h2 class="h1-responsive font-weight-bold my-4 text-start" style="color: rgb(232, 143, 143);">Contact us</h2>
-      <!--Section description-->
-      <!-- <p class="text-center w-responsive mx-auto mb-5">Need more help deciding which software is a good fit before you talk to sales
-        We can help. Submit your contact information and we'll be in touch. <i class="bi bi-bezier2"></i></p> -->
-
-      <div class="row">
-
-          <!--Grid column-->
-          <div class="col-md-9 mb-md-0 mb-5">
-              <form id="contact-form" name="contact-form" action="/result" method="POST">
-              <!-- <form id="contact-form" action="mail.php" name="contact-form" > -->
-                  <!--Grid row-->
-                  <div class="row">
-
-                      <!--Grid column-->
-                      <div class="col-md-6">
-                          <div class="md-form mb-0">
-                              <input type="text" id="name" name="name" class="form-control">
-                              <label for="name" class="">Your name</label>
-                          </div>
-                      </div>
-                      <!--Grid column-->
-
-                      <!--Grid column-->
-                      <div class="col-md-6">
-                          <div class="md-form mb-0">
-                              <input type="text" id="email" name="email" class="form-control">
-                              <label for="email" class="">Your email</label>
-                          </div>
-                      </div>
-                      <!--Grid column-->
-
-                  </div>
-                  <!--Grid row-->
-
-                  <!--Grid row-->
-                  <div class="row mt-3">
-                      <div class="col-md-12">
-                          <div class="md-form mb-0">
-                              <input type="text" id="subject" name="subject" class="form-control">
-                              <label for="subject" class="">Subject</label>
-                          </div>
-                      </div>
-                  </div>
-                  <!--Grid row-->
-
-                  <!--Grid row-->
-                  <div class="row mt-3">
-
-                      <!--Grid column-->
-                      <div class="col-md-12">
-
-                          <div class="md-form">
-                              <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
-                              <label for="message">Your message</label>
-                          </div>
-
-                      </div>
-                  </div>
-                  <!--Grid row-->
-
-              </form>
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold my-4 text-start" style="color: rgb(232, 143, 143);">Contact us</h2>
+          </section>
+      </div>
+     
 
 
-              <div class="text-left text-md-left mt-3">
-                <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
-              </div>
-              <div class="status"></div>
 
-              {{error}}
-              {% if error==True %}
-                <div class="alert alert-danger d-flex align-items-center" role="alert">
-                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                  <div>
-                    {{error}}
-                  </div>
-                </div>
-              
-              {% endif %}
+
+    <form  action="/contact" method="POST"> 
+      <div class="row g-3 ml-2">
+          <div class="col-md-5">
+            <label for="validationDefault01" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="validationDefault01" placeholder="John smith" value="" required>
           </div>
-          <!--Grid column-->
 
-          <!--Grid column-->
-          <!-- <div class="col-md-3 text-center">
-              <ul class="list-unstyled mb-0">
-                  <li><i class="fas fa-map-marker-alt fa-2x"></i>
-                      <p>San Francisco, CA 94126, USA</p>
-                  </li>
-
-                  <li><i class="fas fa-phone mt-4 fa-2x"></i>
-                      <p>+ 01 234 567 89</p>
-                  </li>
-
-                  <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-                      <p>contact@mdbootstrap.com</p>
-                  </li>
-              </ul>
-          </div> -->
-          <!--Grid column-->
-
+          <div class="col-md-5">
+            <label for="validationDefault02" class="form-label">Email</label>
+            <input type="email" class="form-control" id="validationDefault02" placeholder="example@example.com" value="" required>
+          </div>
+          
       </div>
 
-    </section>
-    <!--Section: Contact v.2-->
+      <div class="row g-3 mt-2 ml-2">
+        
+          <div class="col-md-10">
+            <div class="md-form mb-0">
+              <label for="validationDefault02" class="form-label">Subject</label>
+              <input type="text" class="form-control" id="validationDefault02" placeholder="Enter the subject" value="" required>
+            </div>
+          </div>
+      </div>
 
-  </div>
+
+      <div class="row g-3 mt-2 ml-2">
+          <div class="col-md-10">
+            <label for="validationTextarea" class="form-label">Message</label>
+            <textarea style="height:100px ;" class="form-control" id="validationTextarea" placeholder="Type your message here..." required></textarea>
+            
+          </div>
+      
+      
+      </div>              
+      
+      <div class="row g-3 mt-2 ml-2 mb-5">
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+      </div>
+
+
+    </form>
+
+
 </div>
-
-
 
   <!-- <a class='btn btn-primary ml-5' href="{{ url_for('home') }}">Home</a>
     <br/><br/> -->

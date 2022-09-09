@@ -1,9 +1,6 @@
 
 
 
-from pickle import FALSE
-
-
 def get_results(df_user):
 
 
@@ -27,7 +24,8 @@ def get_results(df_user):
     #drop the pricing from data and this can be used to create a feature matrix
     df_pro = df_soft.drop(['Starting Price - Monthly', 'Starting Price - Annually','Price_min','Price_max'], axis=1)
 
-    
+    #get rid of last few numerical columns
+    df_pro = df_pro.iloc[:, :8]
 
     ############################ Creating weight matrix #################################
 
@@ -95,5 +93,31 @@ def get_results(df_user):
 
 
     #filtering top three
-    result_final = result[:5]
-    return result_final
+    #result_final = result[:5]
+
+    #replace unlimited values with 100000 and - with np.nan
+    result = result.reset_index()
+    result = result.replace("unlimited",100000)
+    result = result.replace("-",np.nan)
+    #create an empty column to store closest credits
+    result['credit_rank'] = 0
+
+    try:
+        #call the functions and get the value
+        top_5_pro, below_top_5_pro = Assign.get_credit_index(df_user, result)
+        
+        #sort the list values
+        top_5_pro.sort()
+        
+        if len(top_5_pro) != 0:
+            for i in range(len(top_5_pro)):
+                result['credit_rank'][top_5_pro[i][0]] = top_5_pro[i][1]
+        else:
+            pass
+        
+        result.sort_values(by='credit_rank', ascending=False).reset_index(drop=True).set_index('Company')
+    except:
+        print("please fill in the values")
+
+    print(result)
+    return result[:5]

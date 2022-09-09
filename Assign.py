@@ -143,3 +143,56 @@ def get_price_match(df_1, df_2):
         pass
         
     return df_1
+
+
+
+def credit_fider(df_user_data,df_result, start_column, end_column):
+    top_5 = []
+    below_top_5 = []
+    for i, col in enumerate(df_result.iloc[:,start_column:end_column].columns):
+        if i%2 !=0:
+         
+            for index, item in enumerate(df_result[col]):
+                if df_user_data['contacts'].item() == 100:
+                    if item <= df_user_data['contacts'].item():
+                        if index <=4:
+                            top_5.append((index, item))
+                            print(index, i,item , col)
+                        else:
+                            below_top_5.append((index, item))
+
+                elif len(df_user_data['contacts'].item()[0].split("-")) ==2:
+
+                    if (item >= int(df_user_data['contacts'].item()[0].split("-")[0]) and item <= int(df_user_data['contacts'].item()[0].split("-")[1])) :
+                        if index <=4:
+                            top_5.append((index, item))
+                            print(index, i,item , col)
+                        else:
+                            below_top_5.append((index, item))
+
+                elif df_user_data['contacts'].item()[0] == "more than 5000":
+                    
+                    if item > 5000:
+                        if index <=4:
+                            top_5.append((index, item))
+                            print(index, i,item , col)
+                        else:
+                            below_top_5.append((index, item))
+    
+    return top_5, below_top_5
+
+
+    
+def get_credit_index(df_user_data, df_result):
+    if "monthly" in df_user_data['duration'].item() and len(df_user_data['duration'].item())==1:
+        #result = result.iloc[:,23:33]
+        top_5_pro, below_top_5_pro = credit_fider(df_user_data,df_result, 24, 34)
+        return top_5_pro, below_top_5_pro
+
+    elif "annual" in df_user_data['duration'].item() and len(df_user_data['duration'].item())==1 :
+        #result = result.iloc[:,13:23]
+        top_5_pro, below_top_5_pro = credit_fider(df_user_data,df_result, 15, 24)
+        return top_5_pro, below_top_5_pro
+        
+                            
+    

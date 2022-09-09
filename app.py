@@ -100,35 +100,19 @@ def home():
 
 
 
-@app.route("/result", methods=['GET', 'POST'])
+@app.route("/contact", methods=['GET', 'POST'])
 def result():
 
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-   
-    
-    if request.method == 'POST':
-    #   return render_template("result")
-        user_name = request.form.get("name")
-        email = request.form.get("email")
-        subject = request.form.get("subject")
-        message = request.form.get("message")
-        
-        if user_name==[''] or email==[''] or subject=='' or message=='':
-            error = "All details required.."
-            return render_template("contact.html", error = error)
-
-        # server = smtplib.SMTP("smtp-mail.outlook.com:587")
-        # server.starttls()
-        
-        # server.login("recommender.sales@outlook.com", passwrd.PASS)
-        # server.sendmail("recommender.sales@outlook.com", email, message)
-        # server.quit()
+    # server = smtplib.SMTP("smtp.gmail.com", 587)
+    # server.login("recommender.sales@outlook.com", passwrd.PASS)
+    # server.sendmail("recommender.sales@outlook.com", email, message)
+    # server.quit()
 
 
-        return render_template("contact.html",user_name=user_name, email=email,subject=subject,message=message )
+    # return render_template("contact.html",user_name=user_name, email=email,subject=subject,message=message )
     
 
-    return render_template("result.html")
+    return render_template("contact.html")
 
     
 #run the application
