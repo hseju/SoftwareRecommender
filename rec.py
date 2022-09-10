@@ -1,6 +1,9 @@
 
 
 
+from sys import intern
+
+
 def get_results(df_user):
 
 
@@ -20,7 +23,7 @@ def get_results(df_user):
 
     #removing unnecessary columns
     df_soft = df.drop(['Additional Pricing Info','Website','Unlimited Data Plan', 'Pricing Range', 'Pricing comments','Free Trial','Other'], axis=1)
-
+    df_soft = df_soft.sort_values(by='location', ascending=False)
     #drop the pricing from data and this can be used to create a feature matrix
     df_pro = df_soft.drop(['Starting Price - Monthly', 'Starting Price - Annually','Price_min','Price_max'], axis=1)
 
@@ -37,7 +40,7 @@ def get_results(df_user):
     
     print(df_user)
     for i, col in enumerate(df_user.columns):
-        if df_user[col].dtype == "int64":
+        if df_user[col].dtype == "int64" or df_user[col].dtype == "float64":
             pass
         else:
             if col == "Location":
@@ -82,18 +85,15 @@ def get_results(df_user):
     df_soft = Assign.get_price_match(df_soft, df_user)
     
     #filtering and sorting to provide the best results
-    if str(df_user['price'].item()) not in ["nan"]:
-        if df_user['Location'][0] != ['']:
+    
+    if type(df_user['price'].item()) == int:
+        if len(df_user['Location'].item()[0]) != 0:
             result = df_soft.sort_values(by=['location','closet_price_diff'], ascending=[False,True])
         else:
             result = df_soft.sort_values(by='closet_price_diff', ascending=True)
     else:
         result = df_soft.sort_values(by='recommend', ascending=False)
 
-
-
-    #filtering top three
-    #result_final = result[:5]
 
     #replace unlimited values with 100000 and - with np.nan
     result = result.reset_index()
@@ -120,4 +120,5 @@ def get_results(df_user):
         print("please fill in the values")
 
     print(result)
+
     return result[:5]

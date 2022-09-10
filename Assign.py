@@ -21,15 +21,15 @@ def AssignWeight(feature, df, total_tools):
 def get_software_data(dataframe):
 
     #convert all the contract to list values
-    dataframe['Contract'] = dataframe['Contract'].str.replace(" or ", ",").str.split(',')
+    dataframe['Contract'] = dataframe['Contract'].str.replace(" or ", ",").str.lower().str.split(',')
     #convert all solutions values to list 
-    dataframe['Solutions'] = dataframe['Solutions'].str.split(",")
+    dataframe['Solutions'] = dataframe['Solutions'].str.lower().str.split(",")
     #convert all the CRM values to list
-    dataframe['CRM Integrations'] = dataframe['CRM Integrations'].str.split(",")
+    dataframe['CRM Integrations'] = dataframe['CRM Integrations'].str.lower().str.split(",")
     #convert all SEPI values to list
-    dataframe['SEPI'] = dataframe['SEPI'].str.split(",")
+    dataframe['SEPI'] = dataframe['SEPI'].str.lower().str.split(",")
     #convert all location values to list
-    dataframe['location'] = dataframe['location'].str.split(",")
+    dataframe['location'] = dataframe['location'].str.lower().str.split(",")
     #convert all location values to list
     dataframe['SalesTeamType'] = dataframe['SalesTeamType'].str.lower().str.split(",")
 
@@ -64,23 +64,21 @@ def get_user_data_matrix(dataframe):
     
     for i, col in enumerate(dataframe.columns):
         if col not in ['price','contacts']:
-            if dataframe[col][0][0] == '"i dont have any crm"' or dataframe[col][0][0] == '"i dont have a sales engagement platform"':
-                pass
+            
+            if col in ['crm', 'SEPI_tools']:
+                total_tools = len(dataframe['SEPI_tools'].item()) + len(dataframe['crm'].item())
+                for index,row in dataframe.iterrows():
+                    for item in row[col]:
+                        dataframe.at[index,item] = 1+(1/total_tools)
+            elif col in ['Location']:
+                total_tools = len(dataframe['SEPI_tools'].item()) + len(dataframe['crm'].item())
+                for index,row in dataframe.iterrows():
+                    for item in row[col]:
+                        dataframe.at[index,item] = 1.5+(1/len(dataframe[col]))
             else:
-                if col in ['crm', 'SEPI_tools']:
-                    total_tools = len(dataframe['SEPI_tools'].item()) + len(dataframe['crm'].item())
-                    for index,row in dataframe.iterrows():
-                        for item in row[col]:
-                            dataframe.at[index,item] = 1+(1/total_tools)
-                elif col in ['Location']:
-                    total_tools = len(dataframe['SEPI_tools'].item()) + len(dataframe['crm'].item())
-                    for index,row in dataframe.iterrows():
-                        for item in row[col]:
-                            dataframe.at[index,item] = 1.5+(1/len(dataframe[col]))
-                else:
-                    for index,row in dataframe.iterrows():
-                        for item in row[col]:
-                            dataframe.at[index,item] =1+(1/ len(dataframe[col]))
+                for index,row in dataframe.iterrows():
+                    for item in row[col]:
+                        dataframe.at[index,item] =1+(1/ len(dataframe[col]))
             
     
     
@@ -191,7 +189,7 @@ def get_credit_index(df_user_data, df_result):
 
     elif "annual" in df_user_data['duration'].item() and len(df_user_data['duration'].item())==1 :
         #result = result.iloc[:,13:23]
-        top_5_pro, below_top_5_pro = credit_fider(df_user_data,df_result, 15, 24)
+        top_5_pro, below_top_5_pro = credit_fider(df_user_data,df_result, 14, 24)
         return top_5_pro, below_top_5_pro
         
                             
