@@ -68,27 +68,27 @@
                     <label class="fw-bold" for="validationServer01"> 3. What is your monthly or annual budget?</label>
                     
                     <br /><br />
-                        <div class="col-md-4">
+
+                        <div class="form-check form-check-inline ml-3">
+                            <input class="form-check-input" type="radio" id="inlineCheckbox7" value="Monthly" name="duration" onchange="EnableDisableTextBoxNext('Monthly')">
+                            <label class="form-check-label " for="inlineCheckbox7" >Monthly</label>
+                        </div>
+                        <div class="form-check form-check-inline" >
+                            <input class="form-check-input " type="radio" id="inlineCheckbox8" value="Annual" name="duration" onchange="EnableDisableTextBoxNext('Annual')">
+                            <label class="form-check-label" for="inlineCheckbox8" >Annual</label>
+                        </div>
+
+                        <div class="form-check form-check-inline" >
+                            <input class="form-check-input" type="radio" id="inlineCheckbox9" value="" name="duration" onchange="EnableDisableTextBoxNext('I am not sure')">
+                            <label class="form-check-label" for="inlineCheckbox9" >I am not sure</label>
+                        </div>
+
+                        <div class="col-md-4 mt-3">
                             <div class="input-group mb-6    ">
                             <span class="input-group-text mw-4">$</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="Amount" placeholder="Enter Amount in USD">
+                            <input type="text" class="form-control" disabled="disabled" id="budget" aria-label="Amount (to the nearest dollar)" name="Amount" placeholder="Enter Amount in USD">
                             <span class="input-group-text">.00</span> 
                         </div> <br />
-
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="inlineCheckbox7" value="Monthly" name="duration">
-                            <label class="form-check-label m" for="inlineCheckbox7">Monthly</label>
-                        </div>
-                        <div class="form-check form-check-inline" >
-                            <input class="form-check-input " type="radio" id="inlineCheckbox8" value="Annual" name="duration">
-                            <label class="form-check-label" for="inlineCheckbox8">Annual</label>
-                        </div>
-
-                        <div class="form-check form-check-inline" >
-                            <input class="form-check-input" type="radio" id="inlineCheckbox9" value="" name="duration">
-                            <label class="form-check-label" for="inlineCheckbox9">I am not sure</label>
-                        </div>
-
     
                     </div>
                 </div>
@@ -102,12 +102,12 @@
                     <br />
                     <select class="selectpicker mw-3 ml-3" data-width="50%" aria-label="Default select example" name="contacts">
                         <option value ="" >Select any one</option>
-                        <option value="Not sure">Not sure</option>
+                        <option value="100000">Not sure</option>
                         <option value="0-100">Less than 100</option>
                         <option value="100-500">100-500</option>
                         <option value="500-1000">500-1000</option>
                         <option value="1000-5000">1000-5000</option>
-                        <option value="More than 5000">More than 5000</option>
+                        <option value="100000">More than 5000</option>
 
                       </select>
                 </div>
@@ -181,7 +181,7 @@
                     <label class="fw-bold" for="validationServer01"> 8. What CRM do you use? </label>
                     <!-- <input type="text" class="form-control is-valid-control" id="validationServer01"  placeholder="Enter amount" name="net_month_income", value = "{{ email }}"> -->
                     <br /><br />
-                    <label for="formFile" class="form-label ml-3">Leave it blank if you don't user CRM.</label><br />
+                    <label for="formFile" class="form-label ml-3">Leave it blank if you don't use CRM.</label><br />
 
                     <select class="selectpicker mw-3 ml-3" data-size="5" multiple data-actions-box="true" multiple data-live-search="true" data-width="50%" name="CRM">
                     
@@ -212,7 +212,7 @@
                     <label class="fw-bold" for="validationServer01"> 9. What sales engagement platform do you use?</label>
                     <!-- <input type="text" class="form-control is-valid-control" id="validationServer01"  placeholder="Enter amount" name="net_month_income", value = "{{ email }}"> -->
                     <br /><br />
-                    <label for="formFile" class="form-label ml-3">Leave it blank if you don't user Sales engagement tools.</label><br />
+                    <label for="formFile" class="form-label ml-3">Leave it blank if you don't use Sales engagement tools.</label><br />
                     <select class="selectpicker ml-3" data-size="5" multiple data-actions-box="true" multiple data-live-search="true" data-width="50%" name="SEPI">
                         <option  multiple data-actions-box="true" data-divider="true"></option>
                         <option>Salesloft</option>

@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 });
 
+
+
 function validateForm() {
     console.log("In validate")
     var name =  document.getElementById('name').value;

@@ -99,7 +99,7 @@ def get_price_match(df_1, df_2):
     df_1['Starting Price - Annually'] = df_1['Starting Price - Annually'].str.replace(" ","").str.split(",")
     #create a column that has difference of price between the input budget and available plans 
     #set initial values to zero
-    df_1['closet_price_diff'] = 0
+    df_1['closest_price_diff'] = 0
 
     #loop through each price in the list for a given product and get the difference
     #Assign the lowest price difference to the newly created column 
@@ -107,22 +107,22 @@ def get_price_match(df_1, df_2):
         
         for i in range(len(df_1)):
             diff = 0
-            df_1['closet_price_diff'][i] = 50000
+            df_1['closest_price_diff'][i] = 50000
             
             for j in range(len(df_1['Starting Price - Monthly'][i])):
                 diff =  abs(df_2['price'][0] - int(df_1['Starting Price - Monthly'][i][j]))
-                if diff < df_1['closet_price_diff'][i]: 
-                    df_1['closet_price_diff'][i] = diff
+                if diff < df_1['closest_price_diff'][i]: 
+                    df_1['closest_price_diff'][i] = diff
     elif "annual" in df_2['contract'].item() and len(df_2['contract'].item())==1 :
         
         for i in range(len(df_1)):
             diff = 0
-            df_1['closet_price_diff'][i] = 50000
+            df_1['closest_price_diff'][i] = 50000
             for j in range(len(df_1['Starting Price - Annually'][i])):
                 try:
                     diff =  abs(df_2['price'][0] - int(df_1['Starting Price - Annually'][i][j]))
-                    if diff < df_1['closet_price_diff'][i]: 
-                        df_1['closet_price_diff'][i] = diff
+                    if diff < df_1['closest_price_diff'][i]: 
+                        df_1['closest_price_diff'][i] = diff
                 except:
                     pass
     else:
@@ -142,7 +142,7 @@ def credit_fider(df_user_data,df_result, start_column, end_column):
                 if isinstance(df_user_data['contacts'][0], np.floating):
                     pass
 
-                elif isinstance(df_user_data['contacts'][0], list):
+                elif isinstance(df_user_data['contacts'][0], list) and len(df_user_data['contacts'].item())==2:
                         if (item >= int(df_user_data['contacts'].item()[0].split("-")[0]) and item <= int(df_user_data['contacts'].item()[0].split("-")[1])) :
                             if index <=4:
                                 top_5.append((index, item))
@@ -150,7 +150,7 @@ def credit_fider(df_user_data,df_result, start_column, end_column):
                             else:
                                 below_top_5.append((index, item))
 
-                elif df_user_data['contacts'].item()[0] == "more than 5000":
+                elif len(df_user_data['contacts'].item())==1:
 
                         if item > 5000:
                             if index <=4:

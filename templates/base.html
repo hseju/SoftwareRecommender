@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css">
 
     <title>Software Recommender</title>
 
@@ -31,7 +31,7 @@
     <div class="shadow-none p-3 mb-5 bg-light rounded">
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #38444d;padding-left: 100px; font-family: quicksand;">
         <div class="container-fluid mb-3 mt-3" >
-            <a class="navbar-brand font-weight-bold ml-5" href="{{ url_for('home') }}">SOFTWARE RECOMMENDER</a>
+            <a class="navbar-brand font-weight-bold ml-5" href="{{ url_for('home') }}" style="font-size:25px ;">SOFTWARE RECOMMENDER</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -45,16 +45,9 @@
         </div>
     </nav>
     </div>
-    <br/><br/><br/><br/>    
+    <br/><br/><br/><br/>   
+
     {% block content %}
-
-
-
-
-
-
-
-
 
 
 
@@ -68,43 +61,19 @@
     <br/><br/>
 
 
-
+    <!-- Script to disable the price input field on selection of I am not sure -->
     <script>
-        function validateForm() {
-            console.log("In validate")
-            var name =  document.getElementById('name').value;
-            if (name == "") {
-                document.querySelector('.status').innerHTML = "Name cannot be empty";
-                return false;
+        function EnableDisableTextBoxNext(opt) {
+            if (opt=="Monthly" || opt=="Annual" ){
+                document.getElementById("budget").disabled = false;
             }
-            var email =  document.getElementById('email').value;
-            if (email == "") {
-                document.querySelector('.status').innerHTML = "Email cannot be empty";
-                return false;
-            } else {
-                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                if(!re.test(email)){
-                    document.querySelector('.status').innerHTML = "Email format invalid";
-                    return false;
-                }
+            else{
+                document.getElementById("budget").disabled = true;
             }
-            var subject =  document.getElementById('subject').value;
-            if (subject == "") {
-                document.querySelector('.status').innerHTML = "Subject cannot be empty";
-                return false;
-            }
-            var message =  document.getElementById('message').value;
-            if (message == "") {
-                document.querySelector('.status').innerHTML = "Message cannot be empty";
-                return false;
-            }
-            document.querySelector('.status').innerHTML = "Sending...";
         }
     </script>
 
-
-
-
+   
 
     <!-- <script src="/templates/styles/action.js"></script> -->
     <!-- Optional JavaScript -->

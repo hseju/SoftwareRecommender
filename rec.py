@@ -1,9 +1,6 @@
 
 
 
-from sys import intern
-
-
 def get_results(df_user):
 
 
@@ -38,7 +35,7 @@ def get_results(df_user):
     #Getting user data
     #df_user = pd.read_csv("user_data.csv", index_col=0)
     
-    print(df_user)
+    
     for i, col in enumerate(df_user.columns):
         if df_user[col].dtype == "int64" or df_user[col].dtype == "float64":
             pass
@@ -54,7 +51,9 @@ def get_results(df_user):
                 df_user[col] = df_user[col].str.split(",")
 
     #####################  Weight matrix of User data   ##########################
+    print(df_user)
 
+    #create a matrix of user data
     df_user_matrix = Assign.get_user_data_matrix(df_user)
 
     #match columns and drop the ones that do not match
@@ -74,13 +73,11 @@ def get_results(df_user):
 
     print(df_pro.sum(axis=1))
     
-    
     #adding the recommended weighted sum to the original dataframe
     df_soft['recommend']= df_pro.sum(axis=1)
     #add back the pricing range column 
     df_soft['Pricing Range'] = df['Pricing Range']
     
-    print(df_user['price'].item())
 
     # Finally filtering out the products based on pricing
     df_soft = Assign.get_price_match(df_soft, df_user)
@@ -89,10 +86,10 @@ def get_results(df_user):
     
     if type(df_user['price'].item()) == int:
         if len(df_user['Location'].item()[0]) != 0:
-            result = df_soft.sort_values(by=['location','closet_price_diff'], ascending=[False,True])
+            result = df_soft.sort_values(by=['location','closest_price_diff'], ascending=[False,True])
             result = result.sort_values(by='recommend', ascending=False)
         else:
-            result = df_soft.sort_values(by='closet_price_diff', ascending=True)
+            result = df_soft.sort_values(by='closest_price_diff', ascending=True)
             result = result.sort_values(by='recommend', ascending=False)
             
     else:
@@ -105,7 +102,7 @@ def get_results(df_user):
         
         result = result.sort_values(by='recommend', ascending=False)
 
-    print(result)
+    
     #replace unlimited values with 100000 and - with np.nan
     result = result.reset_index()
     result = result.replace("unlimited",100000)
@@ -126,10 +123,11 @@ def get_results(df_user):
         else:
             pass
         
-        result.sort_values(by='credit_rank', ascending=False).reset_index(drop=True).set_index('Company')
+        result = result.sort_values(by='credit_rank', ascending=False).reset_index(drop=True).set_index('Company')
     except:
         print("please fill in the values")
 
-    #print(result)
-
+    print(result)
+    
+    
     return result[:5], df_user

@@ -3,6 +3,7 @@ import email
 import smtplib
 from unicodedata import name
 import pandas as pd
+import numpy as np
 from email.policy import default
 from flask import Flask, render_template, request, redirect, get_flashed_messages, flash 
 import os
@@ -49,7 +50,10 @@ def home():
 
         data = request.form.getlist("data")
         contract = request.form.getlist("contract")
-        price = request.form['Amount']
+        try:
+            price = request.form['Amount']
+        except:
+            price = ''
         contacts = request.form['contacts']
         duration = request.form.getlist("duration")
         Location = request.form.getlist("Location")
@@ -74,7 +78,7 @@ def home():
         if price != '':
             df['price']  = int(price)
         else:
-            df['price']  = price
+            df['price']  = np.nan
 
         df['contacts']  = [str(contacts)]
         df['duration']  = [str(duration)]
