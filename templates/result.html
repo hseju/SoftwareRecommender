@@ -4,7 +4,7 @@
 
 <div class="container ml-20 mr-20">
   <div class="row ml-3">
-    <h2>These are the top 4 recommendations: </h2> 
+    <h2>These are the top 3 recommendations: </h2> 
     
     <br/>
     <table class="table table-hover mt-5">
@@ -12,7 +12,7 @@
         <thead>
           <tr>
             <th scope="col">Rank</th>
-            <th scope="col">"Company"</th>
+            <th scope="col">Company</th>
             <th scope="col">{{user_data.columns[0]}}</th>
             <!-- <th scope="col">{{user_data.columns[1]}}</th> -->
             {% if "monthly" in user_data.contract[0] %}
@@ -25,7 +25,7 @@
             {% endif %}
             <th scope="col">Contract</th>
             <th scope="col">Prospects Location</th>
-            <th scope="col">Affiliate links</th>
+            <!-- <th scope="col">Affiliate links *</th> -->
           </tr>
         </thead>
       <!-- Table head -->
@@ -53,11 +53,11 @@
             
             <td>{{user_data.iloc[0,1]}}</td>
             <td>{{company['location'][0]}}</td>
-            {% if "Not Available" in company.links[0] %}
+            <!-- {% if "Not Available" in company.links[0] %}
               <td>{{company['links'][0]}}</td>
             {% else %}
-            <td><a href="{{company['links'][0]}}" style="font-family: Poppins;" target="_blank">{{company.index[0]}}</a></td>
-            {% endif %}
+            <td><a href="{{company['links'][0]}}" style="font-family: Poppins;" target="_blank">{{company.links[0]}}</a></td>
+            {% endif %} -->
           </tr>
 
         <!-- ---------------------------   Second row -------------------------------------------- -->
@@ -81,11 +81,11 @@
 
             <td>{{user_data.iloc[0,1]}}</td>
             <td>{{company['location'][1]}}</td>
-            {% if "Not Available" in company.links[1] %}
+            <!-- {% if "Not Available" in company.links[1] %}
               <td>{{company['links'][1]}}</td>
             {% else %}
-            <td><a href="{{company['links'][1]}}" style="font-family: Poppins;" target="_blank">{{company.index[1]}}</a></td>
-            {% endif %}
+            <td><a href="{{company['links'][1]}}" style="font-family: Poppins;" target="_blank">{{company.links[1]}}</a></td>
+            {% endif %} -->
           </tr>
 
         <!-- ---------------------------   Third row -------------------------------------------- -->
@@ -109,11 +109,12 @@
           
             <td>{{user_data.iloc[0,1]}}</td>
             <td>{{company['location'][2]}}</td>
-            {% if "Not Available" in company.links[2] %}
+
+            <!-- {% if "Not Available" in company.links[2] %}
               <td>{{company['links'][2]}}</td>
             {% else %}
-            <td><a href="{{company['links'][2]}}" style="font-family: Poppins;" target="_blank">{{company.index[2]}}</a></td>
-            {% endif %}
+            <td><a href="{{company['links'][2]}}" style="font-family: Poppins;" target="_blank">{{company.links[2]}}</a></td>
+            {% endif %} -->
           </tr>
 
         <!-- ---------------------------   Fourth row -------------------------------------------- -->
@@ -156,7 +157,7 @@
           </tr> -->
         </tbody>
       </table>
-
+    <p> <strong>*</strong> RevPilots may receive an affiliate fee if you click a link, this does not change the price and helps to keep our service at no cost to you. </p>
     <br/><br/>
     
   </div>
