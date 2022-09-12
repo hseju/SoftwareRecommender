@@ -1,2 +1,2 @@
 ,data,contract,price,contacts,duration,Location,features,salesTeam,crm,SEPI_tools
-0,['email'],[],,,[],[],[],[''],[],[]
+0,"['email', 'workphone', 'mobile']",['Annual'],5000,500-1000,['Annual'],['Global'],"['ContactEnrichment', 'IntentData']",[''],[],[]
