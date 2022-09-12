@@ -81,6 +81,7 @@ def get_results(df_user):
     df_soft['Pricing Range'] = df['Pricing Range']
     
     print(df_user['price'].item())
+
     # Finally filtering out the products based on pricing
     df_soft = Assign.get_price_match(df_soft, df_user)
     
@@ -89,12 +90,22 @@ def get_results(df_user):
     if type(df_user['price'].item()) == int:
         if len(df_user['Location'].item()[0]) != 0:
             result = df_soft.sort_values(by=['location','closet_price_diff'], ascending=[False,True])
+            result = result.sort_values(by='recommend', ascending=False)
         else:
             result = df_soft.sort_values(by='closet_price_diff', ascending=True)
+            result = result.sort_values(by='recommend', ascending=False)
+            
     else:
-        result = df_soft.sort_values(by='recommend', ascending=False)
+        if len(df_user['contract'][0]) ==1 and "annual" in df_user['contract'][0] :
+            df_soft['AP1'] = df_soft['AP1'].replace("-",np.nan).astype(float)
+            result = df_soft.sort_values(by='AP1', ascending=True)
+        else:
+            df_soft['MP1'] = df_soft['MP1'].replace("-",np.nan).astype(float)
+            result = df_soft.sort_values(by='MP1', ascending=True)
+        
+        result = result.sort_values(by='recommend', ascending=False)
 
-
+    print(result)
     #replace unlimited values with 100000 and - with np.nan
     result = result.reset_index()
     result = result.replace("unlimited",100000)
@@ -119,6 +130,6 @@ def get_results(df_user):
     except:
         print("please fill in the values")
 
-    print(result)
+    #print(result)
 
-    return result[:5]
+    return result[:5], df_user

@@ -88,8 +88,8 @@ def home():
         df.to_csv("user_data.csv")
         
         import rec
-        result_final = rec.get_results(df)
-        return render_template("result.html", company = result_final, user_data= df)
+        result_final, df_user = rec.get_results(df)
+        return render_template("result.html", company = result_final, user_data= df_user)
          
     else:
     

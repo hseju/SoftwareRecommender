@@ -1,22 +1,6 @@
 import pandas as pd
 import numpy as np
 
-def AssignWeight(feature, df, total_tools):
-    if feature == "SEPI_tools" :
-        for index,row in df.iterrows():
-            for tool in row['SEPI_tools']:
-                df.at[index,tool] =1/total_tools
-    elif feature == "crm":
-        for index,row in df.iterrows():
-            for crm in row['crm']:
-                df.at[index,crm] =1/total_tools
-    else:
-        for index,row in df.iterrows():
-            for contract in row[feature]:
-                df.at[index,contract] = 1    
-
-    return df
-
 
 def get_software_data(dataframe):
 
@@ -64,21 +48,25 @@ def get_user_data_matrix(dataframe):
     
     for i, col in enumerate(dataframe.columns):
         if col not in ['price','contacts']:
-            
             if col in ['crm', 'SEPI_tools']:
                 total_tools = len(dataframe['SEPI_tools'].item()) + len(dataframe['crm'].item())
                 for index,row in dataframe.iterrows():
                     for item in row[col]:
                         dataframe.at[index,item] = 1+(1/total_tools)
             elif col in ['Location']:
-                total_tools = len(dataframe['SEPI_tools'].item()) + len(dataframe['crm'].item())
                 for index,row in dataframe.iterrows():
                     for item in row[col]:
-                        dataframe.at[index,item] = 1.5+(1/len(dataframe[col]))
+                        dataframe.at[index,item] = 3+(1/len(dataframe[col]))
+
+            elif col in ['contract']:
+                for index,row in dataframe.iterrows():
+                    for item in row[col]:
+                        dataframe.at[index,item] = 5.5+(1/len(dataframe[col]))
+
             else:
                 for index,row in dataframe.iterrows():
                     for item in row[col]:
-                        dataframe.at[index,item] =1+(1/ len(dataframe[col]))
+                        dataframe.at[index,item] =2
             
     
     
@@ -115,7 +103,7 @@ def get_price_match(df_1, df_2):
 
     #loop through each price in the list for a given product and get the difference
     #Assign the lowest price difference to the newly created column 
-    if "monthly" in df_2['duration'].item() and len(df_2['duration'].item())==1:
+    if "monthly" in df_2['contract'].item() and len(df_2['contract'].item())==1:
         
         for i in range(len(df_1)):
             diff = 0
@@ -125,7 +113,7 @@ def get_price_match(df_1, df_2):
                 diff =  abs(df_2['price'][0] - int(df_1['Starting Price - Monthly'][i][j]))
                 if diff < df_1['closet_price_diff'][i]: 
                     df_1['closet_price_diff'][i] = diff
-    elif "annual" in df_2['duration'].item() and len(df_2['duration'].item())==1 :
+    elif "annual" in df_2['contract'].item() and len(df_2['contract'].item())==1 :
         
         for i in range(len(df_1)):
             diff = 0
@@ -151,43 +139,37 @@ def credit_fider(df_user_data,df_result, start_column, end_column):
         if i%2 !=0:
          
             for index, item in enumerate(df_result[col]):
-                if df_user_data['contacts'].item() == 100:
-                    if item <= df_user_data['contacts'].item():
-                        if index <=4:
-                            top_5.append((index, item))
-                            print(index, i,item , col)
-                        else:
-                            below_top_5.append((index, item))
+                if isinstance(df_user_data['contacts'][0], np.floating):
+                    pass
 
-                elif len(df_user_data['contacts'].item()[0].split("-")) ==2:
-
-                    if (item >= int(df_user_data['contacts'].item()[0].split("-")[0]) and item <= int(df_user_data['contacts'].item()[0].split("-")[1])) :
-                        if index <=4:
-                            top_5.append((index, item))
-                            print(index, i,item , col)
-                        else:
-                            below_top_5.append((index, item))
+                elif isinstance(df_user_data['contacts'][0], list):
+                        if (item >= int(df_user_data['contacts'].item()[0].split("-")[0]) and item <= int(df_user_data['contacts'].item()[0].split("-")[1])) :
+                            if index <=4:
+                                top_5.append((index, item))
+                                print(index, i,item , col)
+                            else:
+                                below_top_5.append((index, item))
 
                 elif df_user_data['contacts'].item()[0] == "more than 5000":
-                    
-                    if item > 5000:
-                        if index <=4:
-                            top_5.append((index, item))
-                            print(index, i,item , col)
-                        else:
-                            below_top_5.append((index, item))
+
+                        if item > 5000:
+                            if index <=4:
+                                top_5.append((index, item))
+                                print(index, i,item , col)
+                            else:
+                                below_top_5.append((index, item))
     
     return top_5, below_top_5
 
 
     
 def get_credit_index(df_user_data, df_result):
-    if "monthly" in df_user_data['duration'].item() and len(df_user_data['duration'].item())==1:
+    if "monthly" in df_user_data['contract'].item() and len(df_user_data['contract'].item())==1:
         #result = result.iloc[:,23:33]
         top_5_pro, below_top_5_pro = credit_fider(df_user_data,df_result, 24, 34)
         return top_5_pro, below_top_5_pro
 
-    elif "annual" in df_user_data['duration'].item() and len(df_user_data['duration'].item())==1 :
+    elif "annual" in df_user_data['contract'].item() and len(df_user_data['contract'].item())==1 :
         #result = result.iloc[:,13:23]
         top_5_pro, below_top_5_pro = credit_fider(df_user_data,df_result, 14, 24)
         return top_5_pro, below_top_5_pro
