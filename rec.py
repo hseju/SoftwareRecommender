@@ -125,6 +125,7 @@ def get_results(df_user):
         
         result = result.sort_values(by='credit_rank', ascending=False).reset_index(drop=True).set_index('Company')
     except:
+        result = result.reset_index(drop=True).set_index('Company')
         print("please fill in the values")
 
     print(result)
