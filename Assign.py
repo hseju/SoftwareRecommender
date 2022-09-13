@@ -175,4 +175,9 @@ def get_credit_index(df_user_data, df_result):
         return top_5_pro, below_top_5_pro
         
                             
-    
+def format_user_data(dataframe):
+    for k, row in dataframe.iterrows():
+        #data format
+        dataframe['data'][0] = [data.replace(" ","").capitalize() for data in row['data']]
+
+    return dataframe

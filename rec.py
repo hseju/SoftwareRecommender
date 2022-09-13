@@ -35,7 +35,6 @@ def get_results(df_user):
     #Getting user data
     #df_user = pd.read_csv("user_data.csv", index_col=0)
     
-    
     for i, col in enumerate(df_user.columns):
         if df_user[col].dtype == "int64" or df_user[col].dtype == "float64":
             pass
@@ -128,7 +127,9 @@ def get_results(df_user):
         result = result.reset_index(drop=True).set_index('Company')
         print("please fill in the values")
 
-    print(result)
     
     
+    #capitalzing the values in user data "data" column
+    df_user = Assign.format_user_data(df_user)
+    print(df_user)
     return result[:5], df_user
