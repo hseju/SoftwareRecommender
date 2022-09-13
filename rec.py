@@ -131,5 +131,5 @@ def get_results(df_user):
     
     #capitalzing the values in user data "data" column
     df_user = Assign.format_user_data(df_user)
-    print(df_user)
+    
     return result[:5], df_user
