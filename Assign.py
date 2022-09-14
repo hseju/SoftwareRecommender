@@ -205,6 +205,21 @@ def get_credit_index(df_user_data, df_result):
         #result = result.iloc[:,13:23]
         top_5_pro, below_top_5_pro = credit_fider(df_user_data,df_result, 14, 24)
         return top_5_pro, below_top_5_pro
+
+    elif len(df_user_data['contract'][0])==2 and len(df_user_data['duration'][0]) > 1:
+        if "monthly" in df_user_data['duration'].item() and len(df_user_data['duration'].item())==1:
+            #result = result.iloc[:,23:33]
+            top_5, below_top_5 = credit_fider(df_user_data,df_result, 24, 34)
+            return top_5, below_top_5
+
+        elif "annual" in df_user_data['duration'].item() and len(df_user_data['duration'].item())==1 :
+            #result = result.iloc[:,13:23]
+            top_5, below_top_5 = credit_fider(df_user_data,df_result, 14, 24)
+            return top_5, below_top_5
+        
+    else:
+        top_5, below_top_5 = credit_fider(df_user_data,df_result, 14, 34)
+        return top_5, below_top_5
         
                             
 def format_user_data(dataframe):
