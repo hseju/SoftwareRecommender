@@ -12,12 +12,12 @@
         <thead>
           <tr>
             <th scope="col">Rank</th>
-            <th scope="col">Company</th>
+            <th scope="col">Company*</th>
             <th scope="col">Data</th>
             <!-- <th scope="col">{{user_data.columns[1]}}</th> -->
             {% if ("monthly" in user_data.contract[0]) and ("annual" in user_data.contract[0]) %}
-              <th scope="col">Monthly Pricing Options**</th>
-              <th scope="col">Annual Pricing Options**</th>
+              <th scope="col">Monthly Pricing Options</th>
+              <th scope="col">Annual Pricing Options</th>
             {% elif "annual" in user_data.contract[0] %}
               <th scope="col">Annual Pricing Options**</th>
             {% else %}
