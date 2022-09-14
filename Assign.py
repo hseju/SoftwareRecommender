@@ -59,9 +59,14 @@ def get_user_data_matrix(dataframe):
                         dataframe.at[index,item] = 3+(1/len(dataframe[col]))
 
             elif col in ['contract']:
-                for index,row in dataframe.iterrows():
-                    for item in row[col]:
-                        dataframe.at[index,item] = 5.5+(1/len(dataframe[col]))
+                if len(dataframe['contract'][0]) ==2:
+                    for index,row in dataframe.iterrows():
+                        for item in row['duration']:
+                            dataframe.at[index,item] = 5.5+(1/len(dataframe['duration']))
+                else:
+                    for index,row in dataframe.iterrows():
+                        for item in row[col]:
+                            dataframe.at[index,item] = 5.5+(1/len(dataframe[col]))
 
             else:
                 for index,row in dataframe.iterrows():
@@ -125,6 +130,33 @@ def get_price_match(df_1, df_2):
                         df_1['closest_price_diff'][i] = diff
                 except:
                     pass
+    elif len(df_2['contract'][0])==2:
+        if "monthly" in df_2['duration'].item() and len(df_2['duration'].item())==1:
+
+            for i in range(len(df_1)):
+                diff = 0
+                df_1['closest_price_diff'][i] = 50000
+
+                for j in range(len(df_1['Starting Price - Monthly'][i])):
+                    diff =  abs(df_2['price'][0] - int(df_1['Starting Price - Monthly'][i][j]))
+                    if diff < df_1['closest_price_diff'][i]: 
+                        df_1['closest_price_diff'][i] = diff
+
+        elif "annual" in df_2['duration'].item() and len(df_2['duration'].item())==1 :
+
+            for i in range(len(df_1)):
+                diff = 0
+                df_1['closest_price_diff'][i] = 50000
+
+                for j in range(len(df_1['Starting Price - Annually'][i])):
+                    try:
+                        diff =  abs(df_2['price'][0] - int(df_1['Starting Price - Annually'][i][j]))
+
+                        if diff < df_1['closest_price_diff'][i]: 
+                            df_1['closest_price_diff'][i] = diff
+                    except:
+                        pass
+        
     else:
         pass
         
