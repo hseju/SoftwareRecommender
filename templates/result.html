@@ -76,7 +76,7 @@
             {% if "Not Available" in company.links[0] %}
               <td>{{company['links'][0]}}</td>
             {% else %}
-            <td><a href="{{company['links'][0]}}" style="font-family: Poppins;" target="_blank">{{company.links[0]}}</a></td>
+            <td><a href="{{company['links'][0]}}" style="font-family: Poppins;" target="_blank">{{company.index[0]}}</a></td>
             {% endif %}
           </tr>
 
@@ -122,7 +122,7 @@
             {% if "Not Available" in company.links[1] %}
               <td>{{company['links'][1]}}</td>
             {% else %}
-            <td><a href="{{company['links'][1]}}" style="font-family: Poppins;" target="_blank">{{company.links[1]}}</a></td>
+            <td><a href="{{company['links'][1]}}" style="font-family: Poppins;" target="_blank">{{company.index[1]}}</a></td>
             {% endif %}
           </tr>
 
@@ -170,7 +170,7 @@
             {% if "Not Available" in company.links[2] %}
               <td>{{company['links'][2]}}</td>
             {% else %}
-            <td><a href="{{company['links'][2]}}" style="font-family: Poppins;" target="_blank">{{company.links[2]}}</a></td>
+            <td><a href="{{company['links'][2]}}" style="font-family: Poppins;" target="_blank">{{company.index[2]}}</a></td>
             {% endif %}
           </tr>
 
