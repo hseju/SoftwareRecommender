@@ -26,7 +26,7 @@
             {% endif %}
             <th scope="col">Contract</th>
             <th scope="col">Prospects Location</th>
-            <th scope="col">Affiliate links *</th>
+            <!-- <th scope="col">Affiliate links *</th> -->
           </tr>
         </thead>
       <!-- Table head -->
@@ -37,7 +37,7 @@
           <tr>
             <th scope="row">1</th>
             <!-- <td><i class="fas fa-graduation-cap mr-2 grey-text" aria-hidden="true"></i>{{company.index[0]}}</td> -->
-            <td>{{company.index[0]}}</td>
+            <td><a href="{{company['links'][0]}}" style="font-family: Poppins;" target="_blank">{{company.index[0]}}</a></td>
             {% if (user_data.data[0][0].lower() in company.Solutions[0]) %}
               <td> {{user_data.data[0][0]}} <br>  {{user_data.data[0][1]}} <br>  {{user_data.data[0][2]}}</td>
 
@@ -73,11 +73,11 @@
 
 
             <td>{{company['location'][0]}}</td>
-            {% if "Not Available" in company.links[0] %}
+            <!-- {% if "Not Available" in company.links[0] %}
               <td>{{company['links'][0]}}</td>
             {% else %}
             <td><a href="{{company['links'][0]}}" style="font-family: Poppins;" target="_blank">{{company.index[0]}}</a></td>
-            {% endif %}
+            {% endif %} -->
           </tr>
 
         <!-- ---------------------------   Second row -------------------------------------------- -->
@@ -85,7 +85,7 @@
           <tr>
             <th scope="row">2</th>
             <!-- <td>{{company.index[1]}}</td> -->
-            <td>{{company.index[1]}}</td>
+            <td><a href="{{company['links'][1]}}" style="font-family: Poppins;" target="_blank">{{company.index[1]}}</a></td>
             {% if user_data.data[0][0].lower() in company.Solutions[0] %}
               <td> {{user_data.data[0][0]}} <br>  {{user_data.data[0][1]}} <br>  {{user_data.data[0][2]}}</td>
             {% endif %}
@@ -119,11 +119,11 @@
             {% endif %}
 
             <td>{{company['location'][1]}}</td>
-            {% if "Not Available" in company.links[1] %}
+            <!-- {% if "Not Available" in company.links[1] %}
               <td>{{company['links'][1]}}</td>
             {% else %}
             <td><a href="{{company['links'][1]}}" style="font-family: Poppins;" target="_blank">{{company.index[1]}}</a></td>
-            {% endif %}
+            {% endif %} -->
           </tr>
 
         <!-- ---------------------------   Third row -------------------------------------------- -->
@@ -131,7 +131,7 @@
           <tr>
             <th scope="row">3</th>
             <!-- <td>{{company.index[2]}}</td> -->
-            <td>{{company.index[2]}}</td>
+            <td><a href="{{company['links'][2]}}" style="font-family: Poppins;" target="_blank">{{company.index[2]}}</a></td>
             {% if user_data.data[0][0].lower() in company.Solutions[0] %}
               <td> {{user_data.data[0][0]}} <br> {{user_data.data[0][1]}} <br>  {{user_data.data[0][2]}}</td>
             {% endif %} 
@@ -167,11 +167,11 @@
 
             <td>{{company['location'][2]}}</td>
 
-            {% if "Not Available" in company.links[2] %}
+            <!-- {% if "Not Available" in company.links[2] %}
               <td>{{company['links'][2]}}</td>
             {% else %}
             <td><a href="{{company['links'][2]}}" style="font-family: Poppins;" target="_blank">{{company.index[2]}}</a></td>
-            {% endif %}
+            {% endif %} -->
           </tr>
 
         <!-- ---------------------------   Fourth row -------------------------------------------- -->
@@ -216,7 +216,6 @@
       </table>
     <p> <strong>*</strong> RevPilots may receive an affiliate fee if you click a link, this does not change the price and helps to keep our service at no cost to you.
       <br/>
-      <strong>**</strong> The prices shown are from the lowest to the highest pricing plan available on affiliate links. 
   
     </p>
     <br/><br/>
