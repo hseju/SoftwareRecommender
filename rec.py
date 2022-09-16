@@ -85,7 +85,7 @@ def get_results(df_user):
     
     if type(df_user['price'].item()) == int:
         if len(df_user['Location'].item()[0]) != 0:
-            result = df_soft.sort_values(by=['location','closest_price_diff'], ascending=[False,True])
+            result = df_soft.sort_values(by=['closest_price_diff'], ascending=[True])
             result = result.sort_values(by='recommend', ascending=False)
         else:
             result = df_soft.sort_values(by='closest_price_diff', ascending=True)
